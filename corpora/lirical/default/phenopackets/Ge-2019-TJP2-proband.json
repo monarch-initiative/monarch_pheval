@@ -402,7 +402,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ge-2019-TJP2-proband.vcf.gz",
+      "uri": "Ge-2019-TJP2-proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

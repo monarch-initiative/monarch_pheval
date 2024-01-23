@@ -421,7 +421,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Tamhankar-2014-ROR2-Patient_1.vcf.gz",
+      "uri": "Tamhankar-2014-ROR2-Patient_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

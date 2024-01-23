@@ -406,7 +406,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Higuchi-2017-COL2A1-proband.vcf.gz",
+      "uri": "Higuchi-2017-COL2A1-proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

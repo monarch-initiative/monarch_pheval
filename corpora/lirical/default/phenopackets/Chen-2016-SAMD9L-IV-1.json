@@ -151,7 +151,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Chen-2016-SAMD9L-IV-1.vcf.gz",
+      "uri": "Chen-2016-SAMD9L-IV-1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

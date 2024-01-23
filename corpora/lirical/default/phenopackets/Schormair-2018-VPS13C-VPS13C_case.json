@@ -289,7 +289,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Schormair-2018-VPS13C-VPS13C_case.vcf.gz",
+      "uri": "Schormair-2018-VPS13C-VPS13C_case.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

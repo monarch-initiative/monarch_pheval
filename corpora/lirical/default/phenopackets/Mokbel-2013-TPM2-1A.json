@@ -146,7 +146,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Mokbel-2013-TPM2-1A.vcf.gz",
+      "uri": "Mokbel-2013-TPM2-1A.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

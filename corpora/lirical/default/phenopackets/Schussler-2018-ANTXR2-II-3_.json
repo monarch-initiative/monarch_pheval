@@ -295,7 +295,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Schussler-2018-ANTXR2-II-3_.vcf.gz",
+      "uri": "Schussler-2018-ANTXR2-II-3_.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

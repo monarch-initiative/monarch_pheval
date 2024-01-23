@@ -151,7 +151,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Lambe-2018-CAPN1-II-4.vcf.gz",
+      "uri": "Lambe-2018-CAPN1-II-4.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

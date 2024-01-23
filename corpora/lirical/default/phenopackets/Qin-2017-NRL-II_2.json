@@ -133,7 +133,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Qin-2017-NRL-II_2.vcf.gz",
+      "uri": "Qin-2017-NRL-II_2.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

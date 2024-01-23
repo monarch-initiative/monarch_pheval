@@ -223,7 +223,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Steinkellner-2015-ADAMTS10-18-year-old_woman.vcf.gz",
+      "uri": "Steinkellner-2015-ADAMTS10-18-year-old_woman.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

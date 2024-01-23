@@ -317,7 +317,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Gerding-2009-LITAF-Proband.vcf.gz",
+      "uri": "Gerding-2009-LITAF-Proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

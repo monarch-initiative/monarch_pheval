@@ -475,7 +475,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Oud-2017-EXTL3-D_IV-1.vcf.gz",
+      "uri": "Oud-2017-EXTL3-D_IV-1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

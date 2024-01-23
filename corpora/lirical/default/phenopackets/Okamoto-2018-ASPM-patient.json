@@ -271,7 +271,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Okamoto-2018-ASPM-patient.vcf.gz",
+      "uri": "Okamoto-2018-ASPM-patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

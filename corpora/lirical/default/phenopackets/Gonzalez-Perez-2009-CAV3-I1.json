@@ -356,7 +356,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Gonzalez-Perez-2009-CAV3-I1.vcf.gz",
+      "uri": "Gonzalez-Perez-2009-CAV3-I1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

@@ -169,7 +169,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Calado-2005-UMOD-proband.vcf.gz",
+      "uri": "Calado-2005-UMOD-proband.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

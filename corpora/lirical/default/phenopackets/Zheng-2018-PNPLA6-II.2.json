@@ -235,7 +235,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Zheng-2018-PNPLA6-II.2.vcf.gz",
+      "uri": "Zheng-2018-PNPLA6-II.2.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

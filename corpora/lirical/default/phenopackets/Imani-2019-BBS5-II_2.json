@@ -170,7 +170,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Imani-2019-BBS5-II_2.vcf.gz",
+      "uri": "Imani-2019-BBS5-II_2.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

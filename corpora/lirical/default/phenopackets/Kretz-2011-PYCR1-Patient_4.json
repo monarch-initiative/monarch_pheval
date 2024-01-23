@@ -351,7 +351,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Kretz-2011-PYCR1-Patient_4.vcf.gz",
+      "uri": "Kretz-2011-PYCR1-Patient_4.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

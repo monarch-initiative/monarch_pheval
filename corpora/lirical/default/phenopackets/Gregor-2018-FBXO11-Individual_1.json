@@ -532,7 +532,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Gregor-2018-FBXO11-Individual_1.vcf.gz",
+      "uri": "Gregor-2018-FBXO11-Individual_1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

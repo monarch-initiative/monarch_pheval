@@ -297,7 +297,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Shervin_Badv-2019-ASAH1-patient.vcf.gz",
+      "uri": "Shervin_Badv-2019-ASAH1-patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

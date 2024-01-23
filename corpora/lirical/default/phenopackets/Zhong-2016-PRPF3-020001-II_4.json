@@ -134,7 +134,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Zhong-2016-PRPF3-020001-II_4.vcf.gz",
+      "uri": "Zhong-2016-PRPF3-020001-II_4.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

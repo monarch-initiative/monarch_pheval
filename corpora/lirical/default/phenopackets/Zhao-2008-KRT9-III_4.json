@@ -115,7 +115,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Zhao-2008-KRT9-III_4.vcf.gz",
+      "uri": "Zhao-2008-KRT9-III_4.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

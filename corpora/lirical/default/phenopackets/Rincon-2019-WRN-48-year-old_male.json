@@ -388,7 +388,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Rincon-2019-WRN-48-year-old_male.vcf.gz",
+      "uri": "Rincon-2019-WRN-48-year-old_male.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

@@ -92,7 +92,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Smith-2017-ACP4-Family_1-IV_3.vcf.gz",
+      "uri": "Smith-2017-ACP4-Family_1-IV_3.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

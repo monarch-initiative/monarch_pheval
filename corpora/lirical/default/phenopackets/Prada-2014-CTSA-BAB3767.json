@@ -331,7 +331,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Prada-2014-CTSA-BAB3767.vcf.gz",
+      "uri": "Prada-2014-CTSA-BAB3767.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

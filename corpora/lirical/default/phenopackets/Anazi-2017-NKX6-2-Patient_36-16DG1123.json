@@ -151,7 +151,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Anazi-2017-NKX6-2-Patient_36-16DG1123.vcf.gz",
+      "uri": "Anazi-2017-NKX6-2-Patient_36-16DG1123.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

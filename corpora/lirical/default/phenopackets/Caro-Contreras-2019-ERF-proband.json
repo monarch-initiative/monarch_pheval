@@ -368,7 +368,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Caro-Contreras-2019-ERF-proband.vcf.gz",
+      "uri": "Caro-Contreras-2019-ERF-proband.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

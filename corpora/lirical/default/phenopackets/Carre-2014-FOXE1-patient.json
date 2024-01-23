@@ -186,7 +186,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Carre-2014-FOXE1-patient.vcf.gz",
+      "uri": "Carre-2014-FOXE1-patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

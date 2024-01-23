@@ -379,7 +379,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Habarou-2017-LIPT2-P1.vcf.gz",
+      "uri": "Habarou-2017-LIPT2-P1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

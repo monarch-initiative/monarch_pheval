@@ -151,7 +151,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ishii-2013-KCNT1-Patient-1.vcf.gz",
+      "uri": "Ishii-2013-KCNT1-Patient-1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

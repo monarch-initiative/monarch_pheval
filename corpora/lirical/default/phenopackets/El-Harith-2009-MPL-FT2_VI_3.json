@@ -79,7 +79,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/El-Harith-2009-MPL-FT2_VI_3.vcf.gz",
+      "uri": "El-Harith-2009-MPL-FT2_VI_3.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

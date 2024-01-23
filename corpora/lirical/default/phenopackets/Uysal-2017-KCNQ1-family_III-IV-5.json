@@ -133,7 +133,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Uysal-2017-KCNQ1-family_III-IV-5.vcf.gz",
+      "uri": "Uysal-2017-KCNQ1-family_III-IV-5.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

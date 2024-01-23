@@ -403,7 +403,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hsu-2017-SNAP29-The_patient.vcf.gz",
+      "uri": "Hsu-2017-SNAP29-The_patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

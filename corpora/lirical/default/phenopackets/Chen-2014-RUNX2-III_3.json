@@ -241,7 +241,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Chen-2014-RUNX2-III_3.vcf.gz",
+      "uri": "Chen-2014-RUNX2-III_3.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

@@ -673,7 +673,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Kury-2017-PSMD12-Subject_1.vcf.gz",
+      "uri": "Kury-2017-PSMD12-Subject_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

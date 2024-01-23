@@ -190,7 +190,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Dastsooz-2017-PANK2-Family_I_patient_I.vcf.gz",
+      "uri": "Dastsooz-2017-PANK2-Family_I_patient_I.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

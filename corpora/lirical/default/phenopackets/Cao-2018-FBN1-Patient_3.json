@@ -133,7 +133,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Cao-2018-FBN1-Patient_3.vcf.gz",
+      "uri": "Cao-2018-FBN1-Patient_3.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

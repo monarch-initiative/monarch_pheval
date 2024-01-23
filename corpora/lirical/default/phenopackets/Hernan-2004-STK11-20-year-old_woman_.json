@@ -115,7 +115,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hernan-2004-STK11-20-year-old_woman_.vcf.gz",
+      "uri": "Hernan-2004-STK11-20-year-old_woman_.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

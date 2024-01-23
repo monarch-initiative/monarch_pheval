@@ -1780,7 +1780,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Fregeau-2016-RERE-Subject_5.vcf.gz",
+      "uri": "Fregeau-2016-RERE-Subject_5.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

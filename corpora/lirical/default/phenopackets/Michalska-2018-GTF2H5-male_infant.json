@@ -577,7 +577,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Michalska-2018-GTF2H5-male_infant.vcf.gz",
+      "uri": "Michalska-2018-GTF2H5-male_infant.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

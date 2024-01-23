@@ -181,7 +181,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Van_De_Weghe-2017-ARMC9-UW132-3.vcf.gz",
+      "uri": "Van_De_Weghe-2017-ARMC9-UW132-3.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

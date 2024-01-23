@@ -584,7 +584,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Slavotinek-2017-TBL1XR1-seven_year_old_male.vcf.gz",
+      "uri": "Slavotinek-2017-TBL1XR1-seven_year_old_male.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

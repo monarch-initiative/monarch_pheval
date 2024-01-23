@@ -530,7 +530,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Bulut-2017-SETBP1-proposita.vcf.gz",
+      "uri": "Bulut-2017-SETBP1-proposita.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

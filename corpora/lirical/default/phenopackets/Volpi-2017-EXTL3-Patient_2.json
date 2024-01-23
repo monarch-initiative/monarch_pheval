@@ -205,7 +205,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Volpi-2017-EXTL3-Patient_2.vcf.gz",
+      "uri": "Volpi-2017-EXTL3-Patient_2.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

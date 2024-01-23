@@ -1027,7 +1027,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Skraban-2017-WDR26-Individual_1,_PPMD01P,_GEA055P.vcf.gz",
+      "uri": "Skraban-2017-WDR26-Individual_1,_PPMD01P,_GEA055P.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

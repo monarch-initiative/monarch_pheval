@@ -187,7 +187,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Canosa-2018-SOD1-patient.vcf.gz",
+      "uri": "Canosa-2018-SOD1-patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

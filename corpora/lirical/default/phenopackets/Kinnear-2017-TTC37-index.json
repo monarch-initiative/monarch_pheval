@@ -370,7 +370,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Kinnear-2017-TTC37-index.vcf.gz",
+      "uri": "Kinnear-2017-TTC37-index.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

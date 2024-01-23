@@ -169,7 +169,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Romero-Quintana-2013-CTSC-Case_1P1.vcf.gz",
+      "uri": "Romero-Quintana-2013-CTSC-Case_1P1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

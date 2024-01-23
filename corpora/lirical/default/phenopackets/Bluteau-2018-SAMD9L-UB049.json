@@ -192,7 +192,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Bluteau-2018-SAMD9L-UB049.vcf.gz",
+      "uri": "Bluteau-2018-SAMD9L-UB049.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

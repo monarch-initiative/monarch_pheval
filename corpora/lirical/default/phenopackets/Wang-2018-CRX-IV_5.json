@@ -133,7 +133,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Wang-2018-CRX-IV_5.vcf.gz",
+      "uri": "Wang-2018-CRX-IV_5.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

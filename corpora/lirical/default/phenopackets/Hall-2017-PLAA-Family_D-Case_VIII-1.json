@@ -313,7 +313,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hall-2017-PLAA-Family_D-Case_VIII-1.vcf.gz",
+      "uri": "Hall-2017-PLAA-Family_D-Case_VIII-1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

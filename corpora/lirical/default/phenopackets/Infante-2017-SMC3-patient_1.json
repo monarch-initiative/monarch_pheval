@@ -476,7 +476,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Infante-2017-SMC3-patient_1.vcf.gz",
+      "uri": "Infante-2017-SMC3-patient_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

@@ -187,7 +187,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Seven-2014-DYM-Patient_2.vcf.gz",
+      "uri": "Seven-2014-DYM-Patient_2.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

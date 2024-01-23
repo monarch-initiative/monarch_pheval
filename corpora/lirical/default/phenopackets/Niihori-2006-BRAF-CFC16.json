@@ -351,7 +351,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Niihori-2006-BRAF-CFC16.vcf.gz",
+      "uri": "Niihori-2006-BRAF-CFC16.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

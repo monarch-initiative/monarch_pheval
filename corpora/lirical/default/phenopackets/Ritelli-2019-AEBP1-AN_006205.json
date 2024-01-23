@@ -476,7 +476,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ritelli-2019-AEBP1-AN_006205.vcf.gz",
+      "uri": "Ritelli-2019-AEBP1-AN_006205.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

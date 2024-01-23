@@ -475,7 +475,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Kremer-2016-TANGO2-F1_II.2.vcf.gz",
+      "uri": "Kremer-2016-TANGO2-F1_II.2.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

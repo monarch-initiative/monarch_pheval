@@ -227,7 +227,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Yao-2019-FGFR3-VI-5.vcf.gz",
+      "uri": "Yao-2019-FGFR3-VI-5.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

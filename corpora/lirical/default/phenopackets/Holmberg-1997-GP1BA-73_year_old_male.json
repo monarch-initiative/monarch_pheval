@@ -151,7 +151,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Holmberg-1997-GP1BA-73_year_old_male.vcf.gz",
+      "uri": "Holmberg-1997-GP1BA-73_year_old_male.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

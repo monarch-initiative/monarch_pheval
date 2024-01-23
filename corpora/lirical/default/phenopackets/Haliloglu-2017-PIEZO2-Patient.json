@@ -277,7 +277,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Haliloglu-2017-PIEZO2-Patient.vcf.gz",
+      "uri": "Haliloglu-2017-PIEZO2-Patient.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

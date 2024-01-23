@@ -325,7 +325,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hirabayashi-2018-SPINT2-two-month-old_male.vcf.gz",
+      "uri": "Hirabayashi-2018-SPINT2-two-month-old_male.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

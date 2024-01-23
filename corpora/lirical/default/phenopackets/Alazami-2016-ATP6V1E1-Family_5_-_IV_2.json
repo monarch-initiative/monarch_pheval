@@ -124,7 +124,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Alazami-2016-ATP6V1E1-Family_5_-_IV_2.vcf.gz",
+      "uri": "Alazami-2016-ATP6V1E1-Family_5_-_IV_2.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

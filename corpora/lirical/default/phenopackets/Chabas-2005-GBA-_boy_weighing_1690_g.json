@@ -180,7 +180,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Chabas-2005-GBA-_boy_weighing_1690_g.vcf.gz",
+      "uri": "Chabas-2005-GBA-_boy_weighing_1690_g.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

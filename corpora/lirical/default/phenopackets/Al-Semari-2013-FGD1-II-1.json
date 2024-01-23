@@ -242,7 +242,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Al-Semari-2013-FGD1-II-1.vcf.gz",
+      "uri": "Al-Semari-2013-FGD1-II-1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

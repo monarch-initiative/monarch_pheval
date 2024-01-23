@@ -349,7 +349,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Chong-2016-TBCK-B-IV-6.vcf.gz",
+      "uri": "Chong-2016-TBCK-B-IV-6.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

@@ -248,7 +248,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Salas-Alanis-2016-ANTXR1-14_year_old_brother.vcf.gz",
+      "uri": "Salas-Alanis-2016-ANTXR1-14_year_old_brother.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

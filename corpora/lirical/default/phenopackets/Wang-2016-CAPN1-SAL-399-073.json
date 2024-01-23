@@ -217,7 +217,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Wang-2016-CAPN1-SAL-399-073.vcf.gz",
+      "uri": "Wang-2016-CAPN1-SAL-399-073.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

@@ -163,7 +163,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Travaglini-2017-CAPN1-index.vcf.gz",
+      "uri": "Travaglini-2017-CAPN1-index.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

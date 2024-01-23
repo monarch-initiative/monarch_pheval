@@ -242,7 +242,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Moreau-Le_Lan-2018-ACTA1-Patient_5.vcf.gz",
+      "uri": "Moreau-Le_Lan-2018-ACTA1-Patient_5.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

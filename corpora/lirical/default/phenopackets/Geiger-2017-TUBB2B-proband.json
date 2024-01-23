@@ -388,7 +388,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Geiger-2017-TUBB2B-proband.vcf.gz",
+      "uri": "Geiger-2017-TUBB2B-proband.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

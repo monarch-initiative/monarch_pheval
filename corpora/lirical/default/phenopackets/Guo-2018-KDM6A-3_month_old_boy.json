@@ -452,7 +452,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Guo-2018-KDM6A-3_month_old_boy.vcf.gz",
+      "uri": "Guo-2018-KDM6A-3_month_old_boy.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

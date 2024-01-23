@@ -423,7 +423,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Bhoj-2016-TBCK-1-1.vcf.gz",
+      "uri": "Bhoj-2016-TBCK-1-1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

@@ -133,7 +133,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Inlora-2017-APTX-V-3.vcf.gz",
+      "uri": "Inlora-2017-APTX-V-3.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

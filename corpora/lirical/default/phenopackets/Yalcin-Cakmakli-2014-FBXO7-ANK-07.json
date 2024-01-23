@@ -188,7 +188,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Yalcin-Cakmakli-2014-FBXO7-ANK-07.vcf.gz",
+      "uri": "Yalcin-Cakmakli-2014-FBXO7-ANK-07.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

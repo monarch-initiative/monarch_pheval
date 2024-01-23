@@ -295,7 +295,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Tesi-2017-SAMD9L-II-4.vcf.gz",
+      "uri": "Tesi-2017-SAMD9L-II-4.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

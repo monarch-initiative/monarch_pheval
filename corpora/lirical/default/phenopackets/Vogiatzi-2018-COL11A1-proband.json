@@ -223,7 +223,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Vogiatzi-2018-COL11A1-proband.vcf.gz",
+      "uri": "Vogiatzi-2018-COL11A1-proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

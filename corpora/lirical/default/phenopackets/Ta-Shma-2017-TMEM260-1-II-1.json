@@ -484,7 +484,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ta-Shma-2017-TMEM260-1-II-1.vcf.gz",
+      "uri": "Ta-Shma-2017-TMEM260-1-II-1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

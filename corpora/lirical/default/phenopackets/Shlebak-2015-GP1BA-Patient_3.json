@@ -244,7 +244,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Shlebak-2015-GP1BA-Patient_3.vcf.gz",
+      "uri": "Shlebak-2015-GP1BA-Patient_3.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

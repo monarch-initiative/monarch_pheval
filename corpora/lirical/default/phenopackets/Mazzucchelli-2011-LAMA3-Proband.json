@@ -97,7 +97,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Mazzucchelli-2011-LAMA3-Proband.vcf.gz",
+      "uri": "Mazzucchelli-2011-LAMA3-Proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

@@ -417,7 +417,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Rejeb-2017-VPS13B-proposita.vcf.gz",
+      "uri": "Rejeb-2017-VPS13B-proposita.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

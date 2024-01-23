@@ -136,7 +136,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Dinani-2017-AAGAB-family_1_proband.vcf.gz",
+      "uri": "Dinani-2017-AAGAB-family_1_proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

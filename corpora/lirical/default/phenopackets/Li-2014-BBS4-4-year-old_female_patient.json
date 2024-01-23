@@ -241,7 +241,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Li-2014-BBS4-4-year-old_female_patient.vcf.gz",
+      "uri": "Li-2014-BBS4-4-year-old_female_patient.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

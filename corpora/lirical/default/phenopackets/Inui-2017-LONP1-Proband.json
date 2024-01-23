@@ -328,7 +328,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Inui-2017-LONP1-Proband.vcf.gz",
+      "uri": "Inui-2017-LONP1-Proband.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

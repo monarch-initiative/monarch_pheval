@@ -109,7 +109,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Van_Zwieten-2013-SLC4A1-c.1432-2A_T.vcf.gz",
+      "uri": "Van_Zwieten-2013-SLC4A1-c.1432-2A_T.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

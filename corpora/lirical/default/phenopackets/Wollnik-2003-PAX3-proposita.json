@@ -205,7 +205,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Wollnik-2003-PAX3-proposita.vcf.gz",
+      "uri": "Wollnik-2003-PAX3-proposita.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

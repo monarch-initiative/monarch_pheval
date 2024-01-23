@@ -271,7 +271,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Dorboz-2017-NKX6-2-Patient_4_II-1.vcf.gz",
+      "uri": "Dorboz-2017-NKX6-2-Patient_4_II-1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

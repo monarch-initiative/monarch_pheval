@@ -223,7 +223,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ritelli-2013-COL5A1-AN_002501.vcf.gz",
+      "uri": "Ritelli-2013-COL5A1-AN_002501.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

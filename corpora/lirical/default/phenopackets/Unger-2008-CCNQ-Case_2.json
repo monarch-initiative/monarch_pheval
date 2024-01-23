@@ -308,7 +308,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Unger-2008-CCNQ-Case_2.vcf.gz",
+      "uri": "Unger-2008-CCNQ-Case_2.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

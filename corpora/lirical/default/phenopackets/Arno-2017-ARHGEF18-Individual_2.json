@@ -235,7 +235,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Arno-2017-ARHGEF18-Individual_2.vcf.gz",
+      "uri": "Arno-2017-ARHGEF18-Individual_2.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

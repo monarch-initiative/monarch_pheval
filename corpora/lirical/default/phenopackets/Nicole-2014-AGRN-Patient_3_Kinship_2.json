@@ -362,7 +362,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Nicole-2014-AGRN-Patient_3_Kinship_2.vcf.gz",
+      "uri": "Nicole-2014-AGRN-Patient_3_Kinship_2.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

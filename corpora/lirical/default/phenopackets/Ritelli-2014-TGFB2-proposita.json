@@ -332,7 +332,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ritelli-2014-TGFB2-proposita.vcf.gz",
+      "uri": "Ritelli-2014-TGFB2-proposita.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

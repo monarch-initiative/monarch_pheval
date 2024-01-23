@@ -278,7 +278,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Noch-2017-ATP13A2-Case_1.vcf.gz",
+      "uri": "Noch-2017-ATP13A2-Case_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

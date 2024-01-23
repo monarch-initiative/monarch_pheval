@@ -169,7 +169,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hirschhorn-1991-ADA-Patient.vcf.gz",
+      "uri": "Hirschhorn-1991-ADA-Patient.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

@@ -97,7 +97,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Nevidomskyte-2017-SMAD3-54-year_old_woman.vcf.gz",
+      "uri": "Nevidomskyte-2017-SMAD3-54-year_old_woman.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

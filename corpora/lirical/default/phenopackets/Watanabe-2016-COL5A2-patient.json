@@ -206,7 +206,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Watanabe-2016-COL5A2-patient.vcf.gz",
+      "uri": "Watanabe-2016-COL5A2-patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

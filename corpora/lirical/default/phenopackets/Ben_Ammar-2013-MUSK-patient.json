@@ -371,7 +371,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Ben_Ammar-2013-MUSK-patient.vcf.gz",
+      "uri": "Ben_Ammar-2013-MUSK-patient.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

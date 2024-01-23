@@ -343,7 +343,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Dougherty-2016-NPC1-The_proband.vcf.gz",
+      "uri": "Dougherty-2016-NPC1-The_proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

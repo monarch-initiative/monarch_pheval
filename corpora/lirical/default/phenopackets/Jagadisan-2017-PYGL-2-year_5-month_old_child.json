@@ -319,7 +319,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Jagadisan-2017-PYGL-2-year_5-month_old_child.vcf.gz",
+      "uri": "Jagadisan-2017-PYGL-2-year_5-month_old_child.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

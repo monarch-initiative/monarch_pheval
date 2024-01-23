@@ -295,7 +295,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hamzeh-2016-GPSM2-case_1.vcf.gz",
+      "uri": "Hamzeh-2016-GPSM2-case_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

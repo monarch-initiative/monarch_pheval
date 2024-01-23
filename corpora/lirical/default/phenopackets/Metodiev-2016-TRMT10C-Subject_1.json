@@ -416,7 +416,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Metodiev-2016-TRMT10C-Subject_1.vcf.gz",
+      "uri": "Metodiev-2016-TRMT10C-Subject_1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

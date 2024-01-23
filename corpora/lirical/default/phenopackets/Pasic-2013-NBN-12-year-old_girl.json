@@ -385,7 +385,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Pasic-2013-NBN-12-year-old_girl.vcf.gz",
+      "uri": "Pasic-2013-NBN-12-year-old_girl.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

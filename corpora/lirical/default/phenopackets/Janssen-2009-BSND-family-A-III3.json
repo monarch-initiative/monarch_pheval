@@ -224,7 +224,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Janssen-2009-BSND-family-A-III3.vcf.gz",
+      "uri": "Janssen-2009-BSND-family-A-III3.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

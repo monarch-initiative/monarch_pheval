@@ -170,7 +170,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Bordbar-2017-PRF1-8-year-old_boy.vcf.gz",
+      "uri": "Bordbar-2017-PRF1-8-year-old_boy.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

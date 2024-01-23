@@ -135,7 +135,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Shahid-2019-FERMT3-index.vcf.gz",
+      "uri": "Shahid-2019-FERMT3-index.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

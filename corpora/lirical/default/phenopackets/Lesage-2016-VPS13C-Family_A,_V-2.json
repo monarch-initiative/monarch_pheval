@@ -388,7 +388,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Lesage-2016-VPS13C-Family_A,_V-2.vcf.gz",
+      "uri": "Lesage-2016-VPS13C-Family_A,_V-2.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

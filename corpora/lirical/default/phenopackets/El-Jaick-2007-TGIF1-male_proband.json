@@ -182,7 +182,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/El-Jaick-2007-TGIF1-male_proband.vcf.gz",
+      "uri": "El-Jaick-2007-TGIF1-male_proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

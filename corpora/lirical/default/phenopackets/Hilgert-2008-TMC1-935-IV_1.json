@@ -93,7 +93,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hilgert-2008-TMC1-935-IV_1.vcf.gz",
+      "uri": "Hilgert-2008-TMC1-935-IV_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

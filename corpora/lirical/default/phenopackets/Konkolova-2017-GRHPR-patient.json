@@ -262,7 +262,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Konkolova-2017-GRHPR-patient.vcf.gz",
+      "uri": "Konkolova-2017-GRHPR-patient.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

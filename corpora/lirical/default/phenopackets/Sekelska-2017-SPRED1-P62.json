@@ -97,7 +97,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Sekelska-2017-SPRED1-P62.vcf.gz",
+      "uri": "Sekelska-2017-SPRED1-P62.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

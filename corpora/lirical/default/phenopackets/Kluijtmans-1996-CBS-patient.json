@@ -134,7 +134,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Kluijtmans-1996-CBS-patient.vcf.gz",
+      "uri": "Kluijtmans-1996-CBS-patient.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

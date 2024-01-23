@@ -280,7 +280,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Cuchanski-2018-KIF5A-proband.vcf.gz",
+      "uri": "Cuchanski-2018-KIF5A-proband.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

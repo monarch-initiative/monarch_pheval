@@ -412,7 +412,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Gao-2019-RUNX2-Family_A_II1.vcf.gz",
+      "uri": "Gao-2019-RUNX2-Family_A_II1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

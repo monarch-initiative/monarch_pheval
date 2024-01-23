@@ -206,7 +206,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Devalla-2016-TECRL-Patient_1.vcf.gz",
+      "uri": "Devalla-2016-TECRL-Patient_1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

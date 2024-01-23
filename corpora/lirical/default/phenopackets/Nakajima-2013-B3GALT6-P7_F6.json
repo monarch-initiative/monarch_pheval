@@ -625,7 +625,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Nakajima-2013-B3GALT6-P7_F6.vcf.gz",
+      "uri": "Nakajima-2013-B3GALT6-P7_F6.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

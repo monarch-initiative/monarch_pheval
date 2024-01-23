@@ -205,7 +205,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Gowda-2017-MCOLN1-6_year_old_boy.vcf.gz",
+      "uri": "Gowda-2017-MCOLN1-6_year_old_boy.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

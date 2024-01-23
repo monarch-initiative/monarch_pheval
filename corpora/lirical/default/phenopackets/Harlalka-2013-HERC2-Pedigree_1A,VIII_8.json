@@ -223,7 +223,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Harlalka-2013-HERC2-Pedigree_1A,VIII_8.vcf.gz",
+      "uri": "Harlalka-2013-HERC2-Pedigree_1A,VIII_8.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

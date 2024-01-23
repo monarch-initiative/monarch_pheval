@@ -422,7 +422,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Lalani-2016-TANGO2-Suject_1.vcf.gz",
+      "uri": "Lalani-2016-TANGO2-Suject_1.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

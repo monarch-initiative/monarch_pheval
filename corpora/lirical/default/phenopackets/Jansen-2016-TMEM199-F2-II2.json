@@ -400,7 +400,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Jansen-2016-TMEM199-F2-II2.vcf.gz",
+      "uri": "Jansen-2016-TMEM199-F2-II2.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

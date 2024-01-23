@@ -169,7 +169,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Claverie-Martin-2019-LMX1B-index.vcf.gz",
+      "uri": "Claverie-Martin-2019-LMX1B-index.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

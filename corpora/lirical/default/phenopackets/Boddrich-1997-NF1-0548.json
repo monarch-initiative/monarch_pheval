@@ -197,7 +197,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Boddrich-1997-NF1-0548.vcf.gz",
+      "uri": "Boddrich-1997-NF1-0548.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

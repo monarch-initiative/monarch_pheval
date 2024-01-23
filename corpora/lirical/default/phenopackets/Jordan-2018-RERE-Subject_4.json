@@ -356,7 +356,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Jordan-2018-RERE-Subject_4.vcf.gz",
+      "uri": "Jordan-2018-RERE-Subject_4.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

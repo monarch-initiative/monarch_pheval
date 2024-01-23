@@ -171,7 +171,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Seidlmayer-2018-RYR2-proband.vcf.gz",
+      "uri": "Seidlmayer-2018-RYR2-proband.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

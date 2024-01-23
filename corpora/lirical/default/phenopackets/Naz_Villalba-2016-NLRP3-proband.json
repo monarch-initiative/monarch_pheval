@@ -225,7 +225,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Naz_Villalba-2016-NLRP3-proband.vcf.gz",
+      "uri": "Naz_Villalba-2016-NLRP3-proband.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

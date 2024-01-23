@@ -187,7 +187,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Hashemi-Gorji-2019-MED23-IV.8.vcf.gz",
+      "uri": "Hashemi-Gorji-2019-MED23-IV.8.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

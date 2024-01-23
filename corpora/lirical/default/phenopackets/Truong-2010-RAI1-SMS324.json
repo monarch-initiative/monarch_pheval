@@ -511,7 +511,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Truong-2010-RAI1-SMS324.vcf.gz",
+      "uri": "Truong-2010-RAI1-SMS324.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

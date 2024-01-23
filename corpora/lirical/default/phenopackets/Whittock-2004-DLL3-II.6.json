@@ -200,7 +200,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Whittock-2004-DLL3-II.6.vcf.gz",
+      "uri": "Whittock-2004-DLL3-II.6.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

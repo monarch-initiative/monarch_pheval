@@ -199,7 +199,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Zerkaoui-2015-GALC-child.vcf.gz",
+      "uri": "Zerkaoui-2015-GALC-child.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

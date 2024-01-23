@@ -260,7 +260,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Mattioli-2017-BRPF1-Individual_11_Family_F.vcf.gz",
+      "uri": "Mattioli-2017-BRPF1-Individual_11_Family_F.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

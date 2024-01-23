@@ -297,7 +297,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Al-Dosari-2010-TFAP2A-10-year-old_girl.vcf.gz",
+      "uri": "Al-Dosari-2010-TFAP2A-10-year-old_girl.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

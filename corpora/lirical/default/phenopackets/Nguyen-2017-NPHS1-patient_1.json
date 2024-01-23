@@ -283,7 +283,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Nguyen-2017-NPHS1-patient_1.vcf.gz",
+      "uri": "Nguyen-2017-NPHS1-patient_1.vcf.gz",
       "fileAttributes": {
         "genomeAssembly": "GRCh37",
         "fileFormat": "vcf"

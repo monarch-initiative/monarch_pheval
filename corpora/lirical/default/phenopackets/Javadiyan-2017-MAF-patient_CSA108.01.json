@@ -79,7 +79,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Javadiyan-2017-MAF-patient_CSA108.01.vcf.gz",
+      "uri": "Javadiyan-2017-MAF-patient_CSA108.01.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

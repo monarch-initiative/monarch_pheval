@@ -313,7 +313,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Xu-2017-CWC27-4_II-3.vcf.gz",
+      "uri": "Xu-2017-CWC27-4_II-3.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

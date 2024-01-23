@@ -164,7 +164,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Dias-2013-TRPS1-girl.vcf.gz",
+      "uri": "Dias-2013-TRPS1-girl.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

@@ -261,7 +261,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Djamshidian-2009-VCP-II-3.vcf.gz",
+      "uri": "Djamshidian-2009-VCP-II-3.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

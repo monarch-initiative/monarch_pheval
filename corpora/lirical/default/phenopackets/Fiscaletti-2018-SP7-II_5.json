@@ -350,7 +350,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Fiscaletti-2018-SP7-II_5.vcf.gz",
+      "uri": "Fiscaletti-2018-SP7-II_5.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

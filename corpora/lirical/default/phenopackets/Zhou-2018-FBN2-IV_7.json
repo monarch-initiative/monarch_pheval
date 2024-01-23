@@ -174,7 +174,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Zhou-2018-FBN2-IV_7.vcf.gz",
+      "uri": "Zhou-2018-FBN2-IV_7.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

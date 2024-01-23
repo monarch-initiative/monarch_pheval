@@ -279,7 +279,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Kantaputra-2014-FBLN5-4-year-old_Burmese_girl_.vcf.gz",
+      "uri": "Kantaputra-2014-FBLN5-4-year-old_Burmese_girl_.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"

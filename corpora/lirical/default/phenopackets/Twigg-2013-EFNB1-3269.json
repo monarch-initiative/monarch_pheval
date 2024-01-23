@@ -362,7 +362,7 @@
   ],
   "files": [
     {
-      "uri": "file:///nfs/production/parkinso/spot/pheval/x/monarch_pheval/corpora/lirical/scrambled-0/vcf/Twigg-2013-EFNB1-3269.vcf.gz",
+      "uri": "Twigg-2013-EFNB1-3269.vcf.gz",
       "fileAttributes": {
         "fileFormat": "vcf",
         "genomeAssembly": "GRCh37"
