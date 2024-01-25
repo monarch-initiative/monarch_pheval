@@ -1,0 +1,22 @@
+tool: exomiser
+tool_version: 13.2.1
+variant_analysis: True
+gene_analysis: True
+disease_analysis: True
+tool_specific_configuration_options:
+  environment: local
+  exomiser_software_directory: .
+  analysis_configuration_file: preset-exome-analysis.yml
+  max_jobs: 0
+  application_properties:
+    remm_version:
+    cadd_version:
+    hg19_data_version: 2302
+    hg19_local_frequency_path:
+    hg38_data_version: 2302
+    phenotype_data_version: 2302
+    cache_type:
+    cache_caffeine_spec:
+  post_process:
+    score_name: combinedScore
+    sort_order: DESCENDING

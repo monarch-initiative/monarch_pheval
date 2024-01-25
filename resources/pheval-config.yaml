@@ -1,38 +1,57 @@
-phenotype:
-  version: 2309
-  url: https://data.monarchinitiative.org/exomiser/latest/
-
 directories:
   data: data
   tmp: data/tmp
 
 corpora:
   - id: lirical
-    scrambled:
-      - factor: 0
-      - factor: 0.5
-      - factor: 0.7
     custom_variants:
       - id: no_phenotype
 
+# corpora:
+#   - id: lirical
+#     scrambled:
+#       - factor: 0
+#       - factor: 0.5
+#       - factor: 0.7
+#     custom_variants:
+#       - id: no_phenotype
+
 configs:
   - tool: exomiser
-    version: 13.1.0
+    version: 13.2.1
+    phenotype: 2302
+    configuration: 2302_phenotype
+  - tool: exomiser
+    version: 13.3.0
+    phenotype: 2302
+    configuration: 2302_phenotype
+  - tool: exomiser
+    version: 13.2.1
+    phenotype: 2309
+    configuration: 2309_phenotype
+  - tool: exomiser
+    version: 13.3.0
+    phenotype: 2309
     configuration: 2309_phenotype
 
 runs:
   - tool: exomiser
     corpus: lirical
-    corpusvariant: scrambled-0
-    version: 13.1.0
+    corpusvariant: default
+    version: 13.2.1
+    configuration: 2302_phenotype
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: 2302_phenotype
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.2.1
     configuration: 2309_phenotype
   - tool: exomiser
     corpus: lirical
-    corpusvariant: scrambled-0.5
-    version: 13.1.0
-    configuration: 2309_phenotype
-  - tool: exomiser
-    corpus: lirical
-    corpusvariant: scrambled-0.7
-    version: 13.1.0
+    corpusvariant: default
+    version: 13.3.0
     configuration: 2309_phenotype

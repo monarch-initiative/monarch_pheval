@@ -1,36 +1,35 @@
 # This includes all the preprocessing not directly related to the PhEval Running
 
-EXOMISER_VERSION				:=	13.1.0
-PHENOTYPE_VERSION				:=	2309
+EXOMISER_VERSIONS				:=	13.2.1 13.3.0
+PHENOTYPE_VERSIONS				:=	2302 2309
 
 
-.PHONY: download
-download: download-exomiser download-phenotype
+.PHONY: setup
+setup: download-exomiser download-phenotype
 
 .PHONY: download-exomiser
-download-exomiser: $(RUNNERS_DIR)/exomiser-$(EXOMISER_VERSION)
+download-exomiser: $(addprefix $(RUNNERS_DIR)/exomiser-,$(EXOMISER_VERSIONS))
 
-$(TMP_DATA)/exomiser-cli-$(EXOMISER_VERSION)-distribution.zip:
+$(TMP_DATA)/exomiser-cli-%-distribution.zip:
 	mkdir -p $(TMP_DATA)
-	wget https://github.com/exomiser/Exomiser/releases/download/$(EXOMISER_VERSION)/exomiser-cli-$(EXOMISER_VERSION)-distribution.zip -O $@
+	wget https://github.com/exomiser/Exomiser/releases/download/$*/exomiser-cli-$*-distribution.zip -O $@
 
-$(RUNNERS_DIR)/exomiser-$(EXOMISER_VERSION): $(TMP_DATA)/exomiser-cli-$(EXOMISER_VERSION)-distribution.zip
+$(RUNNERS_DIR)/exomiser-%: $(TMP_DATA)/exomiser-cli-%-distribution.zip
 	mkdir -p $(RUNNERS_DIR)
 	unzip $< -d $(RUNNERS_DIR)
-	mv $(RUNNERS_DIR)/exomiser-cli-$(EXOMISER_VERSION) $(RUNNERS_DIR)/exomiser-$(EXOMISER_VERSION)
-	cp $(RUNNERS_DIR)/configurations/exomiser-$(EXOMISER_VERSION).config.yaml $(RUNNERS_DIR)/exomiser-$(EXOMISER_VERSION)/config.yaml
-	cp $(RUNNERS_DIR)/configurations/preset-exome-analysis.yml $(RUNNERS_DIR)/exomiser-$(EXOMISER_VERSION)/
+	mv $(RUNNERS_DIR)/exomiser-cli-$* $(RUNNERS_DIR)/exomiser-$*
+	cp $(RUNNERS_DIR)/configurations/preset-exome-analysis.yml $(RUNNERS_DIR)/exomiser-$*/
 
 .PHONY: download-phenotype
-download-phenotype: $(PHENOTYPE_DIR)/$(PHENOTYPE_VERSION)_hg19.sha256 $(PHENOTYPE_DIR)/$(PHENOTYPE_VERSION)_hg38.sha256 $(PHENOTYPE_DIR)/$(PHENOTYPE_VERSION)_phenotype.sha256
-	mkdir -p $(TMP_DATA)
-	mkdir -p $(PHENOTYPE_DIR)
+download-phenotype: $(addprefix $(PHENOTYPE_DIR)/,$(addsuffix _hg19.sha256,$(PHENOTYPE_VERSIONS))) $(addprefix $(PHENOTYPE_DIR)/,$(addsuffix _hg38.sha256,$(PHENOTYPE_VERSIONS))) $(addprefix $(PHENOTYPE_DIR)/,$(addsuffix _phenotype.sha256,$(PHENOTYPE_VERSIONS)))
 
-$(PHENOTYPE_DIR)/$(PHENOTYPE_VERSION)_%.sha256: $(TMP_DATA)/$(PHENOTYPE_VERSION)_%.zip
+$(PHENOTYPE_DIR)/%.sha256: $(TMP_DATA)/phenogeno_%.zip
 	unzip $< -d $(PHENOTYPE_DIR)
 
-$(TMP_DATA)/$(PHENOTYPE_VERSION)%.zip:
-	wget https://data.monarchinitiative.org/exomiser/latest/$(PHENOTYPE_VERSION)$*.zip -O $@
+$(TMP_DATA)/phenogeno_%.zip:
+	mkdir -p $(PHENOTYPE_DIR)
+	mkdir -p $(TMP_DATA)
+	wget https://data.monarchinitiative.org/exomiser/data/$*.zip -O $@
 
 .PHONY: clean
 clean:
