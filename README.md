@@ -43,16 +43,16 @@ With this new feature, the Makefile can be generated within this repo, and the u
 
 The corpora and configuration data were moved from [PhEval](https://github.com/monarch-initiative/pheval) to this new structure.
 
-📦monarch-pheval
-┣ 📂corpora
-┃ ┣ 📂lirical
-┃ ┃ ┗ 📂default
-┃ ┃ ┃ ┣ 📂phenopackets
-┃ ┃ ┃ ┗ 📜corpus.yml
-┣ 📂resources
-┃ ┣ 📜Makefile.j2
-┃ ┣ 📜custom.Makefile
-┃ ┣ 📜generatemakefile.sh
+📦monarch-pheval  
+┣ 📂corpora  
+┃ ┣ 📂lirical  
+┃ ┃ ┗ 📂default  
+┃ ┃ ┃ ┣ 📂phenopackets  
+┃ ┃ ┃ ┗ 📜corpus.yml  
+┣ 📂resources  
+┃ ┣ 📜Makefile.j2  
+┃ ┣ 📜custom.Makefile  
+┃ ┣ 📜generatemakefile.sh  
 ┃ ┗ 📜pheval-config.yaml
 
 ## Configuring and Running an Experiment
