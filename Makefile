@@ -26,14 +26,13 @@ prepare-inputs: configurations/exomiser-13.2.1-2302_phenotype/config.yaml
 
 configurations/exomiser-13.2.1-2302_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-
+	
 	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
-
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
 
@@ -41,14 +40,13 @@ prepare-inputs: configurations/exomiser-13.3.0-2302_phenotype/config.yaml
 
 configurations/exomiser-13.3.0-2302_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-
+	
 	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
-
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
 
@@ -56,14 +54,13 @@ prepare-inputs: configurations/exomiser-13.2.1-2309_phenotype/config.yaml
 
 configurations/exomiser-13.2.1-2309_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-
+	
 	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
-
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
 
@@ -71,18 +68,27 @@ prepare-inputs: configurations/exomiser-13.3.0-2309_phenotype/config.yaml
 
 configurations/exomiser-13.3.0-2309_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-
+	
 	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
-
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
 
 .PHONY: prepare-corpora
+
+results/run_data.txt:
+	touch $@
+
+results/gene_rank_stats.svg: results/run_data.txt
+	pheval-utils benchmark-comparison -r $< -o results --gene-analysis -y bar_cumulative
+
+
+.PHONY: pheval-report
+pheval-report: results/gene_rank_stats.svg
 
 
 results/exomiser-13.2.1/lirical-default-2302_phenotype/results.yml: configurations/exomiser-13.2.1-2302_phenotype/config.yaml corpora/lirical/default/corpus.yml
@@ -99,9 +105,11 @@ results/exomiser-13.2.1/lirical-default-2302_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
+	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
 
+
+.PHONY: pheval-run
 pheval-run: results/exomiser-13.2.1/lirical-default-2302_phenotype/results.yml
-
 
 results/exomiser-13.3.0/lirical-default-2302_phenotype/results.yml: configurations/exomiser-13.3.0-2302_phenotype/config.yaml corpora/lirical/default/corpus.yml
 
@@ -117,9 +125,11 @@ results/exomiser-13.3.0/lirical-default-2302_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
+	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
 
+
+.PHONY: pheval-run
 pheval-run: results/exomiser-13.3.0/lirical-default-2302_phenotype/results.yml
-
 
 results/exomiser-13.2.1/lirical-default-2309_phenotype/results.yml: configurations/exomiser-13.2.1-2309_phenotype/config.yaml corpora/lirical/default/corpus.yml
 
@@ -135,9 +145,11 @@ results/exomiser-13.2.1/lirical-default-2309_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
+	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
 
+
+.PHONY: pheval-run
 pheval-run: results/exomiser-13.2.1/lirical-default-2309_phenotype/results.yml
-
 
 results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml: configurations/exomiser-13.3.0-2309_phenotype/config.yaml corpora/lirical/default/corpus.yml
 
@@ -153,9 +165,11 @@ results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
+	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
 
+
+.PHONY: pheval-run
 pheval-run: results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml
-
 corpora/lirical/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
@@ -169,9 +183,9 @@ corpora/lirical/default/corpus.yml:
 
 .PHONY: pheval
 pheval:
-	$(MAKE) setup
 	$(MAKE) prepare-inputs
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
+	$(MAKE) pheval-report
 
 include ./resources/custom.Makefile

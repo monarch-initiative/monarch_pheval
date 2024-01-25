@@ -32,14 +32,23 @@ configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}
 	cp -rf $(PHENOTYPE_DIR)/{{ config.phenotype }}_phenotype $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype
 	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg19 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg38 $(ROOT_DIR)/$(shell dirname $@)/
-	ln -s $(RUNNERS_DIR)/{{ config.tool }}-{{ config.version }}/* $(ROOT_DIR)/$(shell dirname $@)/
-
+	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg19  || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg38 || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype || ln -s $(RUNNERS_DIR)/{{ config.tool }}-{{ config.version }}/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
 {% endfor %}
 .PHONY: prepare-corpora
+
+results/run_data.txt:
+	touch $@
+
+results/gene_rank_stats.svg: results/run_data.txt
+	pheval-utils benchmark-comparison -r $< -o results --gene-analysis -y bar_cumulative
+
+
+.PHONY: pheval-report
+pheval-report: results/gene_rank_stats.svg
 
 {% for run in runs %}
 results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }}-{{run.configuration}}/results.yml: configurations/{{ run.tool }}-{{ run.version }}-{{ run.configuration }}/config.yaml corpora/{{ run.corpus }}/{{ run.corpusvariant }}/corpus.yml
@@ -56,9 +65,11 @@ results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
+	echo $(ROOT_DIR)/corpora/{{ run.corpus }}/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
 
+
+.PHONY: pheval-run
 pheval-run: results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }}-{{run.configuration}}/results.yml
-
 {% endfor %}
 
 
@@ -106,9 +117,9 @@ corpora/{{ corpus.id }}/{{ custom_corpus.id }}/corpus.yml: $(ROOT_DIR)/testdata/
 
 .PHONY: pheval
 pheval:
-	$(MAKE) setup
 	$(MAKE) prepare-inputs
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
+	$(MAKE) pheval-report
 
 include ./resources/custom.Makefile
