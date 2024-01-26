@@ -105,8 +105,7 @@ results/exomiser-13.2.1/lirical-default-2302_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
-	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
-
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
 pheval-run: results/exomiser-13.2.1/lirical-default-2302_phenotype/results.yml
@@ -125,8 +124,7 @@ results/exomiser-13.3.0/lirical-default-2302_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
-	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
-
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
 pheval-run: results/exomiser-13.3.0/lirical-default-2302_phenotype/results.yml
@@ -145,8 +143,7 @@ results/exomiser-13.2.1/lirical-default-2309_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
-	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
-
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
 pheval-run: results/exomiser-13.2.1/lirical-default-2309_phenotype/results.yml
@@ -165,8 +162,7 @@ results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml: configuratio
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
-	echo $(ROOT_DIR)/corpora/lirical/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
-
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
 pheval-run: results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml

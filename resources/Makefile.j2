@@ -65,8 +65,7 @@ results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
 
 	touch $@
-	echo $(ROOT_DIR)/corpora/{{ run.corpus }}/default/phenopackets	$(ROOT_DIR)/$(shell dirname $@) >> results/run_data.txt
-
+	echo -e "$(ROOT_DIR)/corpora/{{ run.corpus }}/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
 pheval-run: results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }}-{{run.configuration}}/results.yml
