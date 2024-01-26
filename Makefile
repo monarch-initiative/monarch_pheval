@@ -84,8 +84,8 @@ results/run_data.txt:
 	touch $@
 
 results/gene_rank_stats.svg: results/run_data.txt
-	pheval-utils benchmark-comparison -r $< -o results --gene-analysis -y bar_cumulative
-
+	pheval-utils benchmark-comparison -r $< -o $(ROOT_DIR)/$(shell dirname $@)/results --gene-analysis -y bar_cumulative
+	mv $(ROOT_DIR)/gene_rank_stats.svg $@
 
 .PHONY: pheval-report
 pheval-report: results/gene_rank_stats.svg
