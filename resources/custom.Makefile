@@ -2,6 +2,7 @@
 
 EXOMISER_VERSIONS				:=	13.2.1 13.3.0
 PHENOTYPE_VERSIONS				:=	2302 2309
+H2_JAR_URL						:=	https://repo1.maven.org/maven2/com/h2database/h2/1.4.199/h2-1.4.199.jar
 
 
 .PHONY: setup
@@ -9,6 +10,9 @@ setup: download-exomiser download-phenotype
 
 .PHONY: download-exomiser
 download-exomiser: $(addprefix $(RUNNERS_DIR)/exomiser-,$(EXOMISER_VERSIONS))
+
+$(TMP_DATA)/h2.jar:
+	wget $(H2_JAR_URL) -O $@
 
 $(TMP_DATA)/exomiser-cli-%-distribution.zip:
 	mkdir -p $(TMP_DATA)

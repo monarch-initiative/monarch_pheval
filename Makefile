@@ -8,6 +8,7 @@ PHENOTYPE_DIR			:= $(ROOT_DIR)/data/phenotype
 RUNNERS_DIR				:= $(ROOT_DIR)/runners
 NAME					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["name"])')
 VERSION					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["version"])')
+SEMSIM_BASE_URL			:= https://storage.googleapis.com/data-public-monarchinitiative/semantic-similarity/latest
 
 help: info
 	@echo ""
@@ -26,7 +27,7 @@ prepare-inputs: configurations/exomiser-13.2.1-2302_phenotype/config.yaml
 
 configurations/exomiser-13.2.1-2302_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-	
+
 	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
@@ -36,11 +37,63 @@ configurations/exomiser-13.2.1-2302_phenotype/config.yaml:
 
 
 
+
+
+configurations/exomiser-13.2.1-2302_phenotype-hp-hp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix hp -d $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype/2302_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.2.1-2302_phenotype-hp-hp/config.yaml
+
+
+
+configurations/exomiser-13.2.1-2302_phenotype-hp-mp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix mp -d $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype/2302_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.2.1-2302_phenotype-hp-mp/config.yaml
+
+
+
+configurations/exomiser-13.2.1-2302_phenotype-hp-zp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-zp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix zp -d $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype/2302_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.2.1-2302_phenotype-hp-zp/config.yaml
+
+
 prepare-inputs: configurations/exomiser-13.3.0-2302_phenotype/config.yaml
 
 configurations/exomiser-13.3.0-2302_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-	
+
 	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
@@ -50,11 +103,63 @@ configurations/exomiser-13.3.0-2302_phenotype/config.yaml:
 
 
 
+
+
+configurations/exomiser-13.3.0-2302_phenotype-hp-hp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix hp -d $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype/2302_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.3.0-2302_phenotype-hp-hp/config.yaml
+
+
+
+configurations/exomiser-13.3.0-2302_phenotype-hp-mp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix mp -d $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype/2302_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.3.0-2302_phenotype-hp-mp/config.yaml
+
+
+
+configurations/exomiser-13.3.0-2302_phenotype-hp-zp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-zp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2302_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2302_phenotype $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg19  || ln -s $(PHENOTYPE_DIR)/2302_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_hg38 || ln -s $(PHENOTYPE_DIR)/2302_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix zp -d $(ROOT_DIR)/$(shell dirname $@)/2302_phenotype/2302_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.3.0-2302_phenotype-hp-zp/config.yaml
+
+
 prepare-inputs: configurations/exomiser-13.2.1-2309_phenotype/config.yaml
 
 configurations/exomiser-13.2.1-2309_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-	
+
 	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
@@ -64,11 +169,63 @@ configurations/exomiser-13.2.1-2309_phenotype/config.yaml:
 
 
 
+
+
+configurations/exomiser-13.2.1-2309_phenotype-hp-hp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix hp -d $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.2.1-2309_phenotype-hp-hp/config.yaml
+
+
+
+configurations/exomiser-13.2.1-2309_phenotype-hp-mp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix mp -d $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.2.1-2309_phenotype-hp-mp/config.yaml
+
+
+
+configurations/exomiser-13.2.1-2309_phenotype-hp-zp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-zp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.2.1-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.2.1/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix zp -d $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.2.1-2309_phenotype-hp-zp/config.yaml
+
+
 prepare-inputs: configurations/exomiser-13.3.0-2309_phenotype/config.yaml
 
 configurations/exomiser-13.3.0-2309_phenotype/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-	
+
 	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
 	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
@@ -78,7 +235,65 @@ configurations/exomiser-13.3.0-2309_phenotype/config.yaml:
 
 
 
+
+
+configurations/exomiser-13.3.0-2309_phenotype-hp-hp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix hp -d $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.3.0-2309_phenotype-hp-hp/config.yaml
+
+
+
+configurations/exomiser-13.3.0-2309_phenotype-hp-mp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix mp -d $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.3.0-2309_phenotype-hp-mp/config.yaml
+
+
+
+configurations/exomiser-13.3.0-2309_phenotype-hp-zp/config.yaml: $(TMP_DATA)/semsim/phenio-monarch-hp-zp.0.4.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix hp --object-prefix zp -d $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-13.3.0-2309_phenotype-hp-zp/config.yaml
+
+
 .PHONY: prepare-corpora
+
+
+$(TMP_DATA)/semsim/%.tsv:
+	mkdir -p $(TMP_DATA)/semsim/
+	wget $(SEMSIM_BASE_URL)/$*.tsv -O $@
+
 
 results/run_data.txt:
 	touch $@
@@ -166,6 +381,82 @@ results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml: configuratio
 
 .PHONY: pheval-run
 pheval-run: results/exomiser-13.3.0/lirical-default-2309_phenotype/results.yml
+
+results/exomiser-13.2.1/lirical-default-2309_phenotype-hp-mp/results.yml: configurations/exomiser-13.2.1-2309_phenotype-hp-mp/config.yaml corpora/lirical/default/corpus.yml
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.2.1-2309_phenotype-hp-mp \
+	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.2.1 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-13.2.1/lirical-default-2309_phenotype-hp-mp/results.yml
+
+results/exomiser-13.3.0/lirical-default-2309_phenotype-hp-hp/results.yml: configurations/exomiser-13.3.0-2309_phenotype-hp-hp/config.yaml corpora/lirical/default/corpus.yml
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0-2309_phenotype-hp-hp \
+	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.3.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-13.3.0/lirical-default-2309_phenotype-hp-hp/results.yml
+
+results/exomiser-13.3.0/lirical-default-2309_phenotype-hp-mp/results.yml: configurations/exomiser-13.3.0-2309_phenotype-hp-mp/config.yaml corpora/lirical/default/corpus.yml
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0-2309_phenotype-hp-mp \
+	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.3.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-13.3.0/lirical-default-2309_phenotype-hp-mp/results.yml
+
+results/exomiser-13.3.0/lirical-default-2309_phenotype-hp-zp/results.yml: configurations/exomiser-13.3.0-2309_phenotype-hp-zp/config.yaml corpora/lirical/default/corpus.yml
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0-2309_phenotype-hp-zp \
+	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.3.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-13.3.0/lirical-default-2309_phenotype-hp-zp/results.yml
 corpora/lirical/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
@@ -175,6 +466,7 @@ corpora/lirical/default/corpus.yml:
 	 --phenopacket-dir=$(ROOT_DIR)/corpora/lirical/default/phenopackets \
 	 --output-dir $(ROOT_DIR)/corpora/lirical/default/vcf
 	touch $@
+
 
 
 .PHONY: pheval

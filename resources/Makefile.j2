@@ -8,6 +8,7 @@ PHENOTYPE_DIR			:= $(ROOT_DIR)/data/phenotype
 RUNNERS_DIR				:= $(ROOT_DIR)/runners
 NAME					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["name"])')
 VERSION					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["version"])')
+SEMSIM_BASE_URL			:= https://storage.googleapis.com/data-public-monarchinitiative/semantic-similarity/latest
 
 help: info
 	@echo ""
@@ -28,17 +29,46 @@ prepare-inputs: configurations/{{ config.tool }}-{{ config.version }}-{{ config.
 
 configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-	{% set toolversion = config.tool ~ "-" ~ config.version %}
+
 	cp -rf $(PHENOTYPE_DIR)/{{ config.phenotype }}_phenotype $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype
-	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}-{{ config.phenotype }}_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg19  || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg19 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg38 || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg38 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype || ln -s $(RUNNERS_DIR)/{{ config.tool }}-{{ config.version }}/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
+{% if semsim is defined %}
+{% for profile in semsim.profiles %}
+
+configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}/config.yaml: $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.semsimian.tsv $(TMP_DATA)/h2.jar
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+	cp -rf $(PHENOTYPE_DIR)/{{ config.phenotype }}_phenotype $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg19  || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg38 || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype || ln -s $(RUNNERS_DIR)/{{ config.tool }}-{{ config.version }}/* $(ROOT_DIR)/$(shell dirname $@)/
+
+	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix {{ profile.prefixes.subject }} --object-prefix {{ profile.prefixes.object }} -d $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype/{{ config.phenotype }}_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
+
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}/config.yaml
+
+{% endfor %}
+{%- endif -%}
+
+
+
 {% endfor %}
 .PHONY: prepare-corpora
+
+
+$(TMP_DATA)/semsim/%.tsv:
+	mkdir -p $(TMP_DATA)/semsim/
+	wget $(SEMSIM_BASE_URL)/$*.tsv -O $@
+
 
 results/run_data.txt:
 	touch $@
@@ -113,6 +143,7 @@ corpora/{{ corpus.id }}/{{ custom_corpus.id }}/corpus.yml: $(ROOT_DIR)/testdata/
 
 {% endif %}
 {% endfor %}
+
 
 .PHONY: pheval
 pheval:

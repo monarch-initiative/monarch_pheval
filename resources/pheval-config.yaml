@@ -7,6 +7,37 @@ corpora:
     custom_variants:
       - id: no_phenotype
 
+semsim:
+  mappings:
+    - id: hp
+    - id: mp
+    - id: zp
+  ontologies:
+    - id: phenio-monarch
+      mirror_from: http://purl.obolibrary.org/obo/upheno.owl
+  profiles:
+    - subset: hp-hp
+      method: semsimian
+      ontology: phenio-monarch
+      threshold: 0.4
+      prefixes:
+        subject: hp
+        object: hp
+    - subset: hp-mp
+      method: semsimian
+      ontology: phenio-monarch
+      threshold: 0.4
+      prefixes:
+        subject: hp
+        object: mp
+    - subset: hp-zp
+      method: semsimian
+      ontology: phenio-monarch
+      threshold: 0.4
+      prefixes:
+        subject: hp
+        object: zp
+
 # corpora:
 #   - id: lirical
 #     scrambled:
@@ -55,3 +86,23 @@ runs:
     corpusvariant: default
     version: 13.3.0
     configuration: 2309_phenotype
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.2.1
+    configuration: 2309_phenotype-hp-mp
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: 2309_phenotype-hp-hp
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: 2309_phenotype-hp-mp
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: 2309_phenotype-hp-zp
