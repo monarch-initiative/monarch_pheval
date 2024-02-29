@@ -7,14 +7,18 @@ corpora:
     custom_variants:
       - id: no_phenotype
 
+mappings:
+  - id: hp
+  - id: mp
+  - id: zp
+ontologies:
+  - id: phenio-monarch
+    mirror_from: http://purl.obolibrary.org/obo/upheno.owl
+
+gene_to_phenotype:
+  - id: zephin
+
 semsim:
-  mappings:
-    - id: hp
-    - id: mp
-    - id: zp
-  ontologies:
-    - id: phenio-monarch
-      mirror_from: http://purl.obolibrary.org/obo/upheno.owl
   profiles:
     - subset: hp-hp
       method: semsimian
@@ -49,18 +53,34 @@ semsim:
 
 configs:
   - tool: exomiser
-    version: 13.2.1
-    phenotype: 2302
-    configuration: 2302_phenotype
-  - tool: exomiser
+    id: default
     version: 13.3.0
-    phenotype: 2302
-    configuration: 2302_phenotype
+    phenotype: 2309
   - tool: exomiser
-    version: 13.2.1
+    id: phenio-hphp-ingest
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+    version: 13.3.0
+    phenotype: 2309
+  - tool: exomiser
+    id: phenio-hpmp-ingest
+    preprocessing:
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+    version: 13.3.0
+    phenotype: 2309
+  - tool: exomiser
+    id: phenio-hpzp-ingest
+    preprocessing:
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+    version: 13.3.0
     phenotype: 2309
     configuration: 2309_phenotype
   - tool: exomiser
+    id: phenio-allingest
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
     version: 13.3.0
     phenotype: 2309
     configuration: 2309_phenotype
@@ -69,40 +89,26 @@ runs:
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
-    version: 13.2.1
-    configuration: 2302_phenotype
+    version: 13.3.0
+    configuration: default #id from config section
+
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: 2302_phenotype
-  - tool: exomiser
-    corpus: lirical
-    corpusvariant: default
-    version: 13.2.1
-    configuration: 2309_phenotype
+    configuration: phenio-hphp-ingest
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: 2309_phenotype
-  - tool: exomiser
-    corpus: lirical
-    corpusvariant: default
-    version: 13.2.1
-    configuration: 2309_phenotype-hp-mp
+    configuration: phenio-hpmp-ingest
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: 2309_phenotype-hp-hp
+    configuration: phenio-hpzp-ingest
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: 2309_phenotype-hp-mp
-  - tool: exomiser
-    corpus: lirical
-    corpusvariant: default
-    version: 13.3.0
-    configuration: 2309_phenotype-hp-zp
+    configuration: phenio-allingest

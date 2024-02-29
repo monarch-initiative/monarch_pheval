@@ -24,10 +24,23 @@ info:
 
 .PHONY: prepare-inputs
 
-{%- for config in configs %}
-prepare-inputs: configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}/config.yaml
+{% if semsim is defined %}
+{% for profile in semsim.profiles %}
 
-configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}/config.yaml:
+$(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.{{ profile.method }}.sql: $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.{{ profile.method }}.tsv
+	pheval-utils semsim-to-exomisersql --input-file $< --subject-prefix {{ profile.prefixes.subject }} --object-prefix {{ profile.prefixes.object }} -o $@
+{% endfor %}
+{%- endif -%}
+
+
+
+{%- for config in configs %}
+prepare-inputs: configurations/{{ config.id }}/config.yaml
+
+{% if config.preprocessing is defined %}
+SQL_DEPENDENCIES_{{ config.id }} = {%- for pp in config.preprocessing %} $(TMP_DATA)/semsim/{{ pp }} {%endfor %}
+
+configurations/{{ config.id }}/config.yaml: $(SQL_DEPENDENCIES_{{ config.id }}) $(TMP_DATA)/h2.jar
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 
 	cp -rf $(PHENOTYPE_DIR)/{{ config.phenotype }}_phenotype $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype
@@ -37,29 +50,26 @@ configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg38 || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg38 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype || ln -s $(RUNNERS_DIR)/{{ config.tool }}-{{ config.version }}/* $(ROOT_DIR)/$(shell dirname $@)/
 
+ {%- for pp in config.preprocessing %}
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(TMP_DATA)/h2.jar org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype/{{ config.phenotype }}_phenotype -script $(TMP_DATA)/semsim/{{ pp }} -user sa
+ {%endfor %}
 
-{% if semsim is defined %}
-{% for profile in semsim.profiles %}
+.PHONY: semsim-ingest
+semsim-ingest: configurations/{{ config.id }}/config.yaml
 
-configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}/config.yaml: $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.semsimian.tsv $(TMP_DATA)/h2.jar
+{% else %}
+
+configurations/{{ config.id }}/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
-	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
 	cp -rf $(PHENOTYPE_DIR)/{{ config.phenotype }}_phenotype $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype
+	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}-{{ config.phenotype }}_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg19  || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg19 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_hg38 || ln -s $(PHENOTYPE_DIR)/{{ config.phenotype }}_hg38 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype || ln -s $(RUNNERS_DIR)/{{ config.tool }}-{{ config.version }}/* $(ROOT_DIR)/$(shell dirname $@)/
 
-	pheval-utils semsim-to-exomiserdb --input-file $< --subject-prefix {{ profile.prefixes.subject }} --object-prefix {{ profile.prefixes.object }} -d $(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype/{{ config.phenotype }}_phenotype --h2-jar $(ROOT_DIR)/$(TMP_DATA)/h2.jar
-
-
-.PHONY: semsim-ingest
-semsim-ingest: configurations/{{ config.tool }}-{{ config.version }}-{{ config.configuration }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}/config.yaml
-
-{% endfor %}
-{%- endif -%}
-
-
+{% endif %}
 
 {% endfor %}
 .PHONY: prepare-corpora
@@ -81,13 +91,13 @@ results/gene_rank_stats.svg: results/run_data.txt
 pheval-report: results/gene_rank_stats.svg
 
 {% for run in runs %}
-results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }}-{{run.configuration}}/results.yml: configurations/{{ run.tool }}-{{ run.version }}-{{ run.configuration }}/config.yaml corpora/{{ run.corpus }}/{{ run.corpusvariant }}/corpus.yml
+results/{{ run.configuration }}/results.yml: configurations/{{ run.configuration }}/config.yaml corpora/{{ run.corpus }}/{{ run.corpusvariant }}/corpus.yml
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/{{ run.tool }}-{{ run.version }}-{{run.configuration}} \
+	 --input-dir $(ROOT_DIR)/configurations/{{ run.configuration }} \
 	 --testdata-dir $(ROOT_DIR)/corpora/{{ run.corpus }}/{{ run.corpusvariant }} \
 	 --runner {{ run.tool }}phevalrunner \
 	 --tmp-dir {{ directories.tmp }}/ \
@@ -98,7 +108,7 @@ results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }
 	echo -e "$(ROOT_DIR)/corpora/{{ run.corpus }}/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/{{ run.tool }}-{{ run.version }}/{{ run.corpus }}-{{ run.corpusvariant }}-{{run.configuration}}/results.yml
+pheval-run: results/{{ run.configuration }}/results.yml
 {% endfor %}
 
 
