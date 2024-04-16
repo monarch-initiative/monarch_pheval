@@ -15,100 +15,40 @@ ontologies:
   - id: phenio-monarch
     mirror_from: http://purl.obolibrary.org/obo/upheno.owl
 
-gene_to_phenotype:
-  - id: zephin
-
-semsim:
-  profiles:
-    - subset: hp-hp
-      method: semsimian
-      ontology: phenio-monarch
-      threshold: 0.4
-      prefixes:
-        subject: hp
-        object: hp
-    - subset: hp-mp
-      method: semsimian
-      ontology: phenio-monarch
-      threshold: 0.4
-      prefixes:
-        subject: hp
-        object: mp
-    - subset: hp-zp
-      method: semsimian
-      ontology: phenio-monarch
-      threshold: 0.4
-      prefixes:
-        subject: hp
-        object: zp
-
-# corpora:
-#   - id: lirical
-#     scrambled:
-#       - factor: 0
-#       - factor: 0.5
-#       - factor: 0.7
-#     custom_variants:
-#       - id: no_phenotype
-
 configs:
   - tool: exomiser
-    id: default
+    id: default-13.3.0
     version: 13.3.0
     phenotype: 2309
   - tool: exomiser
-    id: phenio-hphp-ingest
-    preprocessing:
-      - phenio-monarch-hp-hp.0.4.semsimian.sql
-    version: 13.3.0
-    phenotype: 2309
-  - tool: exomiser
-    id: phenio-hpmp-ingest
-    preprocessing:
-      - phenio-monarch-hp-mp.0.4.semsimian.sql
-    version: 13.3.0
-    phenotype: 2309
-  - tool: exomiser
-    id: phenio-hpzp-ingest
-    preprocessing:
-      - phenio-monarch-hp-zp.0.4.semsimian.sql
-    version: 13.3.0
-    phenotype: 2309
-    configuration: 2309_phenotype
-  - tool: exomiser
-    id: phenio-allingest
-    preprocessing:
-      - phenio-monarch-hp-hp.0.4.semsimian.sql
-      - phenio-monarch-hp-mp.0.4.semsimian.sql
-      - phenio-monarch-hp-zp.0.4.semsimian.sql
-    version: 13.3.0
-    phenotype: 2309
-    configuration: 2309_phenotype
+    id: default-14.0.0
+    version: 14.0.0
+    phenotype: 2402
+  - tool: gado
+    id: default-1.0.1
+    version: 1.0.1
+  - tool: phen2gene
+    id: default-1.2.3
+    version: 1.2.3
 
 runs:
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: default #id from config section
-
+    configuration: default-13.3.0
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
-    version: 13.3.0
-    configuration: phenio-hphp-ingest
-  - tool: exomiser
+    version: 14.0.0
+    configuration: default-14.0.0
+  - tool: phen2gene
     corpus: lirical
     corpusvariant: default
-    version: 13.3.0
-    configuration: phenio-hpmp-ingest
-  - tool: exomiser
+    version: 1.2.3
+    configuration: default-1.2.3
+  - tool: gado
     corpus: lirical
     corpusvariant: default
-    version: 13.3.0
-    configuration: phenio-hpzp-ingest
-  - tool: exomiser
-    corpus: lirical
-    corpusvariant: default
-    version: 13.3.0
-    configuration: phenio-allingest
+    version: 1.0.1
+    configuration: default-1.0.1

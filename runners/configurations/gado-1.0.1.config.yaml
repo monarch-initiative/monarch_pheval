@@ -1,0 +1,11 @@
+tool: GADO
+tool_version: 1.0.1
+variant_analysis: False
+gene_analysis: True
+disease_analysis: False
+tool_specific_configuration_options:
+  gado_jar: ../../runners/gado/GADO.jar
+  hpo_ontology: hp.obo
+  hpo_predictions_info: predictions_auc_bonf.txt
+  genes: hpo_prediction_genes.txt
+  hpo_predictions: genenetwork_bonf_spiked/genenetwork_bonf_spiked.dat
