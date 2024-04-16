@@ -13,7 +13,7 @@ importlib-metadata = "^4.8.0"
 tomli = "^2.0.1"
 j2cli = "^0.3.10"
 pheval = {git = "https://github.com/monarch-initiative/pheval.git"}
-pheval-exomiser = {git = "https://github.com/monarch-initiative/pheval.exomiser.git"}
+pheval-exomiser = "^0.2.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=7.1.2"}

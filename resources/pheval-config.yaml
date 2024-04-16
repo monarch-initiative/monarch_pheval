@@ -7,51 +7,48 @@ corpora:
     custom_variants:
       - id: no_phenotype
 
-# corpora:
-#   - id: lirical
-#     scrambled:
-#       - factor: 0
-#       - factor: 0.5
-#       - factor: 0.7
-#     custom_variants:
-#       - id: no_phenotype
+mappings:
+  - id: hp
+  - id: mp
+  - id: zp
+ontologies:
+  - id: phenio-monarch
+    mirror_from: http://purl.obolibrary.org/obo/upheno.owl
 
 configs:
   - tool: exomiser
-    version: 13.2.1
-    phenotype: 2302
-    configuration: 2302_phenotype
-  - tool: exomiser
-    version: 13.3.0
-    phenotype: 2302
-    configuration: 2302_phenotype
-  - tool: exomiser
-    version: 13.2.1
-    phenotype: 2309
-    configuration: 2309_phenotype
-  - tool: exomiser
+    id: default-13.3.0
     version: 13.3.0
     phenotype: 2309
-    configuration: 2309_phenotype
+  - tool: exomiser
+    id: default-14.0.0
+    version: 14.0.0
+    phenotype: 2402
+  - tool: gado
+    id: default-1.0.1
+    version: 1.0.1
+  - tool: phen2gene
+    id: default-1.2.3
+    version: 1.2.3
 
 runs:
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
-    version: 13.2.1
-    configuration: 2302_phenotype
-  - tool: exomiser
-    corpus: lirical
-    corpusvariant: default
     version: 13.3.0
-    configuration: 2302_phenotype
+    configuration: default-13.3.0
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
-    version: 13.2.1
-    configuration: 2309_phenotype
-  - tool: exomiser
+    version: 14.0.0
+    configuration: default-14.0.0
+  - tool: phen2gene
     corpus: lirical
     corpusvariant: default
-    version: 13.3.0
-    configuration: 2309_phenotype
+    version: 1.2.3
+    configuration: default-1.2.3
+  - tool: gado
+    corpus: lirical
+    corpusvariant: default
+    version: 1.0.1
+    configuration: default-1.0.1
