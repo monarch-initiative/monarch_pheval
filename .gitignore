@@ -139,3 +139,4 @@ corpora/lirical/default/vcf/
 corpora/lirical/default/template_exome_hg19.vcf.gz
 *gene_rank_comparison.tsv
 results-gene_summary.tsv
+.vscode/
