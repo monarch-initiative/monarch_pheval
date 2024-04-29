@@ -3,6 +3,7 @@
 [PhEval](https://github.com/monarch-initiative/pheval) Project Configuration-Base
 
 - [monarch-pheval](#monarch-pheval)
+  - [Quick Experiment Description](#quick-experiment-description)
   - [Dependency Graph](#dependency-graph)
   - [PhEval Config Structure](#pheval-config-structure)
   - [Configuring and Running an Experiment](#configuring-and-running-an-experiment)
@@ -10,6 +11,20 @@
     - [Generating Makefile](#generating-makefile)
     - [Run the experiment](#run-the-experiment)
 - [Acknowledgements](#acknowledgements)
+
+## Quick Experiment Description
+
+This experiment was designed with a few PhEval runners, using different VGPAs and versions.
+Additionally, we used several Phenotypic data in Exomiser database: 2309 and 2402, we also made some experiments calculating the Semantic Similarity Profile as a Mapping Table.
+
+- Exomiser
+  - 13.3.0 (2309 default)
+  - 13.3.0 (2309 HPxMP Semsim Ingest)
+  - 14.0.0 (2402 default)
+- Phen2Gene
+  - 1.2.3
+- Gado
+  - 1.0.1
 
 ## Dependency Graph
 
