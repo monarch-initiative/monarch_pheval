@@ -16,19 +16,23 @@
 ```mermaid
 graph TD;
     A[monarch-pheval]---->C[pheval.exomiser];
+    A[monarch-pheval]---->C1[pheval.phen2gene];
+    A[monarch-pheval]---->C2[pheval.gado];
     C--Depends-->P[pheval];
+    C1--Depends-->P[pheval];
+    C2--Depends-->P[pheval];
     A--Depends-->P[pheval];
-    S[setup];
-    A--Depends-->S[setup];
-    S---->D[Genotype];
-    S---->E[Phenotype];
-    S---->R[Runner];
-    F[Download];
-    G[Extract];
-    R---->F
-    D---->F
-    E---->F
-    F---->G
+    %% S[setup];
+    %% A--Depends-->S[setup];
+    %% S---->D[Genotype];
+    %% S---->E[Phenotype];
+    %% S---->R[Runner];
+    %% F[Download];
+    %% G[Extract];
+    %% R---->F
+    %% D---->F
+    %% E---->F
+    %% F---->G
 ```
 
 ---
@@ -73,7 +77,7 @@ poetry install
 ### Run the experiment
 
 ```bash
-make pheval
+make all
 ```
 
 ---
