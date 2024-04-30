@@ -6,7 +6,7 @@
   - [Quick Experiment Description](#quick-experiment-description)
     - [Experiment Data Preparation](#experiment-data-preparation)
     - [Semantic Similarity Calculation](#semantic-similarity-calculation)
-  - [Uploaded SEMSIM to Monarch Cloud](#uploaded-semsim-to-monarch-cloud)
+  - [SEMSIM SQL File uploaded to Monarch Cloud](#semsim-sql-file-uploaded-to-monarch-cloud)
   - [Dependency Graph](#dependency-graph)
   - [PhEval Config Structure](#pheval-config-structure)
   - [Configuring and Running an Experiment](#configuring-and-running-an-experiment)
@@ -87,7 +87,7 @@ runoak -i data/ontology/phenio-monarch.db \
 -o data/tmp/phenio_monarch_mp_ic.tsv
 ```
 
-## Uploaded SEMSIM to Monarch Cloud
+## SEMSIM SQL File uploaded to Monarch Cloud
 
 In this experiment, the SEMSIM file used for ingestion (generated using the steps described above) was converted to SQL format and uploaded to Monarch Cloud beforehand. So, unless you want to reproduce SEMSIM steps, it's not required to be executed.
 
