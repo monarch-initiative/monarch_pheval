@@ -37,7 +37,7 @@ The first two Exomiser experiments were executed using default versions without 
 - Exomiser 13.3.0 + Phenotype 2309
 - Exomiser 14.0.0 + Phenotype 2402
 
-We truncated and ingested a new whole set of values into the **2309\*\*** Phenotypic database**\_** through a Semantic Similarity Table Ingestion.
+We truncated and ingested a new whole set of values into the **_2309 Phenotypic database_** through a Semantic Similarity Table Ingestion.
 
 ### Semantic Similarity Calculation
 
