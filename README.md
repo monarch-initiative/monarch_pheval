@@ -83,7 +83,7 @@ runoak -i data/ontology/phenio-monarch.db \
 -g data/tmp/gene_phenotype.10090.tsv \
 -G hpoa_g2p information-content \
 -p i i^MP: \
--o data/tmp/phenio_monarch_hp_ic.tsv
+-o data/tmp/phenio_monarch_mp_ic.tsv
 ```
 
 ## Dependency Graph
