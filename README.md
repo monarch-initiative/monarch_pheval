@@ -12,6 +12,7 @@
     - [Installing dependencies](#installing-dependencies)
     - [Generating Makefile](#generating-makefile)
     - [Run the experiment](#run-the-experiment)
+  - [Results](#results)
 - [Acknowledgements](#acknowledgements)
 
 ## Quick Experiment Description
@@ -19,13 +20,13 @@
 This experiment was designed with a few PhEval runners, using different VGPAs and versions.
 Additionally, we used several Phenotypic data in the Exomiser database: 2309 and 2402, we also made some experiments calculating the Semantic Similarity Profile as a Mapping Table.
 
-- Exomiser
+- [Exomiser](https://exomiser.readthedocs.io/en/latest/)
   - 13.3.0 (2309 default)
   - 13.3.0 (2309 HPxMP Semsim Ingest)
   - 14.0.0 (2402 default)
-- Phen2Gene
+- [Phen2Gene](https://phen2gene.wglab.org/)
   - 1.2.3
-- Gado
+- [Gado](https://github.com/molgenis/systemsgenetics/wiki/GADO-Command-line)
   - 1.0.1
 
 ### Experiment Data Preparation
@@ -36,7 +37,7 @@ The first two Exomiser experiments were executed using default versions without 
 - Exomiser 13.3.0 + Phenotype 2309
 - Exomiser 14.0.0 + Phenotype 2402
 
-We truncated and ingested a new whole set of values into the the **_2309 Phenotypic database_** through a Semantic Similarity Table Ingestion.
+We truncated and ingested a new whole set of values into the **2309\*\*** Phenotypic database**\_** through a Semantic Similarity Table Ingestion.
 
 ### Semantic Similarity Calculation
 
@@ -44,8 +45,45 @@ To calculate a Semantic Similarity profile to be used as an **_Exomiser Phenotyp
 
 Command Executed for Semantic Similarity calculation:
 
+External required files for this calculation:
+
+- [phenio-monarch.db - Phenio Ontology](https://data.monarchinitiative.org/monarch-kg/latest/phenio.db.gz)
+- hp_terms.txt - generated with oak getting all hp terms
+- mp_terms.txt - generated with oak getting all mp terms
+
 ```bash
-runoak -i semsimian:sqlite:data/ontology/phenio-monarch.db similarity -p i --set1-file data/tmp/hp_terms.txt --set2-file data/tmp/mp_terms.txt --min-jaccard-similarity 0.4 --information-content-file data/tmp/phenio_monarch_hp_ic.tsv -O csv -o profiles/phenio-monarch-hp-mp.0.4.semsimian.tsv
+runoak -i semsimian:sqlite:data/ontology/phenio-monarch.db\
+similarity -p i\
+--set1-file data/tmp/hp_terms.txt \
+--set2-file data/tmp/mp_terms.txt \
+--min-jaccard-similarity 0.4 \
+--information-content-file \
+data/tmp/phenio_monarch_hp_ic.tsv \
+-O csv \
+-o profiles/phenio-monarch-hp-mp.0.4.semsimian.tsv
+```
+
+Set file 1 contains all HP terms and set file 2 contains all MP terms.
+
+The original `HP_MP_MAPPINGS` table has 13,492,225 records.
+On the other hand, the _SEMSIM_ file that was ingested has _1,522,836_ it is important to mention, that the SEMSIM calculation was done using 0.4 _--min-jaccard-similarity_. `HP_HP_MAPPINGS` and `HP_ZP_MAPPINGS` kept its original data.
+
+Information content file passed in the `--information-content-file` was calculated beforehand also using [OAK Library](https://incatools.github.io/ontology-access-kit/index.html) and this is the command used for it:
+
+PS: We've calculated IC Scores for HP and MP separately, and then we merged them into one file.
+
+External required files for this calculation:
+
+- [gene_phenotype.9606.tsv - Homo sapiens](https://data.monarchinitiative.org/latest/tsv/gene_associations/gene_phenotype.9606.tsv.gz)
+- [gene_phenotype.10090.tsv - Mus musculus](https://data.monarchinitiative.org/latest/tsv/gene_associations/gene_phenotype.10090.tsv.gz)
+- [phenio-monarch.db - Phenio Ontology](https://data.monarchinitiative.org/monarch-kg/latest/phenio.db.gz)
+
+```bash
+runoak -i data/ontology/phenio-monarch.db \
+-g data/tmp/gene_phenotype.10090.tsv \
+-G hpoa_g2p information-content \
+-p i i^MP: \
+-o data/tmp/phenio_monarch_hp_ic.tsv
 ```
 
 ## Dependency Graph
@@ -118,6 +156,10 @@ make all
 ```
 
 ---
+
+## Results
+
+![alt text](results/gene_rank_stats.svg)
 
 # Acknowledgements
 
