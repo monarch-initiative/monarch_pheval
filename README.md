@@ -6,6 +6,7 @@
   - [Quick Experiment Description](#quick-experiment-description)
     - [Experiment Data Preparation](#experiment-data-preparation)
     - [Semantic Similarity Calculation](#semantic-similarity-calculation)
+  - [Uploaded SEMSIM to Monarch Cloud](#uploaded-semsim-to-monarch-cloud)
   - [Dependency Graph](#dependency-graph)
   - [PhEval Config Structure](#pheval-config-structure)
   - [Configuring and Running an Experiment](#configuring-and-running-an-experiment)
@@ -84,6 +85,22 @@ runoak -i data/ontology/phenio-monarch.db \
 -G hpoa_g2p information-content \
 -p i i^MP: \
 -o data/tmp/phenio_monarch_mp_ic.tsv
+```
+
+## Uploaded SEMSIM to Monarch Cloud
+
+In this experiment, the SEMSIM file used for ingestion (generated using the steps described above) was converted to SQL format and uploaded to Monarch Cloud beforehand. So, unless you want to reproduce SEMSIM steps, it's not required to be executed.
+
+It can be downloaded here:
+[phenio-monarch-hp-mp.0.4.semsimian.sql](https://storage.googleapis.com/data-public-monarchinitiative/semantic-similarity/latest/phenio-monarch-hp-mp.0.4.semsimian.sql)
+
+This file is described in [pheval-config file](resources/pheval-config.yaml) in `preprocessing` section
+
+```yaml
+- tool: exomiser
+  id: exomiser-phenio-hpmp-ingest-13.3.0
+  preprocessing:
+    - phenio-monarch-hp-mp.0.4.semsimian.sql
 ```
 
 ## Dependency Graph
