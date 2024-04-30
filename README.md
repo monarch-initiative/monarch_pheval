@@ -66,7 +66,7 @@ data/tmp/phenio_monarch_hp_ic.tsv \
 Set file 1 contains all HP terms and set file 2 contains all MP terms.
 
 The original `HP_MP_MAPPINGS` table has 13,492,225 records.
-On the other hand, the _SEMSIM_ file that was ingested has _1,522,836_ it is important to mention, that the SEMSIM calculation was done using 0.4 _--min-jaccard-similarity_. `HP_HP_MAPPINGS` and `HP_ZP_MAPPINGS` kept its original data.
+On the other hand, the _SEMSIM_ file that was ingested has _1,522,836_. It is important to mention, that the SEMSIM calculation was done using 0.4 _--min-jaccard-similarity_. `HP_HP_MAPPINGS` and `HP_ZP_MAPPINGS` kept its original data.
 
 Information content file passed in the `--information-content-file` was calculated beforehand also using [OAK Library](https://incatools.github.io/ontology-access-kit/index.html) and this is the command used for it:
 
