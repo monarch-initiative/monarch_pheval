@@ -79,12 +79,12 @@ configurations/exomiser-14.0.0/config.yaml:
 
 
 
-prepare-inputs: configurations/exomiser-phenio-hpmp-ingest-13.3.0/config.yaml
+prepare-inputs: configurations/exomiser-phenio-all-ingest-13.3.0/config.yaml
 
 
-SQL_DEPENDENCIES_exomiser-phenio-hpmp-ingest-13.3.0 = $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql 
+SQL_DEPENDENCIES_exomiser-phenio-all-ingest-13.3.0 = $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.sql  $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql  $(TMP_DATA)/semsim/phenio-monarch-hp-zp.0.4.semsimian.sql 
 
-configurations/exomiser-phenio-hpmp-ingest-13.3.0/config.yaml: $(RUNNERS_DIR)/exomiser-13.3.0 $(SQL_DEPENDENCIES_exomiser-phenio-hpmp-ingest-13.3.0)
+configurations/exomiser-phenio-all-ingest-13.3.0/config.yaml: $(RUNNERS_DIR)/exomiser-13.3.0 $(SQL_DEPENDENCIES_exomiser-phenio-all-ingest-13.3.0)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 
 	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
@@ -93,11 +93,15 @@ configurations/exomiser-phenio-hpmp-ingest-13.3.0/config.yaml: $(RUNNERS_DIR)/ex
 	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
 	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.sql -user sa
+ 
 	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql -user sa
+ 
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-zp.0.4.semsimian.sql -user sa
  
 
 .PHONY: semsim-ingest
-semsim-ingest: configurations/exomiser-phenio-hpmp-ingest-13.3.0/config.yaml
+semsim-ingest: configurations/exomiser-phenio-all-ingest-13.3.0/config.yaml
 
 
 
@@ -206,7 +210,7 @@ results/exomiser-14.0.0/results.yml: configurations/exomiser-14.0.0/config.yaml 
 .PHONY: pheval-run
 pheval-run: results/exomiser-14.0.0/results.yml
 
-results/exomiser-phenio-hpmp-ingest-13.3.0/results.yml: configurations/exomiser-phenio-hpmp-ingest-13.3.0/config.yaml corpora/lirical/default/corpus.yml
+results/exomiser-phenio-all-ingest-13.3.0/results.yml: configurations/exomiser-phenio-all-ingest-13.3.0/config.yaml corpora/lirical/default/corpus.yml
 
 
 
@@ -217,7 +221,7 @@ results/exomiser-phenio-hpmp-ingest-13.3.0/results.yml: configurations/exomiser-
 
 
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/exomiser-phenio-hpmp-ingest-13.3.0 \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-phenio-all-ingest-13.3.0 \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
 	 --runner exomiserphevalrunner \
 	 --tmp-dir data/tmp/ \
@@ -228,7 +232,7 @@ results/exomiser-phenio-hpmp-ingest-13.3.0/results.yml: configurations/exomiser-
 	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/exomiser-phenio-hpmp-ingest-13.3.0/results.yml
+pheval-run: results/exomiser-phenio-all-ingest-13.3.0/results.yml
 
 results/phen2gene-1.2.3/results.yml: configurations/phen2gene-1.2.3/config.yaml corpora/lirical/default/corpus.yml
 
