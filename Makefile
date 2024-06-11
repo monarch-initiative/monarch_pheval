@@ -9,14 +9,15 @@ RUNNERS_DIR				:= $(ROOT_DIR)/runners
 NAME					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["name"])')
 VERSION					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["version"])')
 SEMSIM_BASE_URL			:= https://storage.googleapis.com/data-public-monarchinitiative/semantic-similarity/latest
-EXOMISER_VERSIONS		:=	13.3.0 14.0.0
+
 
 
 help: info
 	@echo ""
 	@echo "help"
 	@echo "make setup -- this runs the download and extraction of genomic, phenotypic and runners data"
-	@echo "make pheval -- this runs the entire pipeline including setup, corpus preparation and pheval run"
+	@echo "make pheval -- this runs pheval pipeline corpus preparation and run"
+	@echo "make all -- this runs the entire pipeline including setup, corpus preparation and pheval run"
 	@echo "make help -- show this help"
 	@echo ""
 
@@ -26,14 +27,50 @@ info:
 
 .PHONY: prepare-inputs
 
+# 
+# 
 
-prepare-inputs: configurations/default-13.3.0/config.yaml
+# # $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql: $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.tsv
+# # 	pheval-utils semsim-to-exomisersql --input-file $< --subject-prefix hp --object-prefix mp -o $@
+
+# 
+corpora/4k/default/config.yaml: $(TMP_DATA)/all_phenopackets/all_phenopackets.zip
+	mkdir -p corpora/4k/default
+	pheval-utils prepare-corpus -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets --gene-analysis -g ensembl_id -o $(ROOT_DIR)/$(shell dirname $@)/
+	touch $@
+	#temporary
+	touch corpora/4k/default/corpus.yml
+prepare-inputs: configurations/exomiser-13.3.0-lirical/config.yaml corpora/4k/default/config.yaml
 
 
 
 
 
-configurations/default-13.3.0/config.yaml:
+
+configurations/exomiser-13.3.0-lirical/config.yaml:
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s 	$(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+
+
+
+
+
+
+prepare-inputs: configurations/exomiser-13.3.0-4k/config.yaml corpora/4k/default/config.yaml
+
+
+
+
+
+
+configurations/exomiser-13.3.0-4k/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 
 	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
@@ -49,13 +86,14 @@ configurations/default-13.3.0/config.yaml:
 
 
 
-prepare-inputs: configurations/default-14.0.0/config.yaml
+prepare-inputs: configurations/exomiser-14.0.0-lirical/config.yaml corpora/4k/default/config.yaml
 
 
 
 
 
-configurations/default-14.0.0/config.yaml:
+
+configurations/exomiser-14.0.0-lirical/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 
 	cp -rf $(PHENOTYPE_DIR)/2402_phenotype $(ROOT_DIR)/$(shell dirname $@)/2402_phenotype
@@ -71,13 +109,87 @@ configurations/default-14.0.0/config.yaml:
 
 
 
-prepare-inputs: configurations/default-1.0.1/config.yaml
+prepare-inputs: configurations/exomiser-14.0.0-4k/config.yaml corpora/4k/default/config.yaml
 
 
 
 
 
-configurations/default-1.0.1/config.yaml:
+
+configurations/exomiser-14.0.0-4k/config.yaml:
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+
+	cp -rf $(PHENOTYPE_DIR)/2402_phenotype $(ROOT_DIR)/$(shell dirname $@)/2402_phenotype
+	cp $(RUNNERS_DIR)/configurations/exomiser-14.0.0-2402_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2402_hg19  || ln -s $(PHENOTYPE_DIR)/2402_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2402_hg38 || ln -s $(PHENOTYPE_DIR)/2402_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2402_phenotype || ln -s $(RUNNERS_DIR)/exomiser-14.0.0/* $(ROOT_DIR)/$(shell dirname $@)/
+
+
+
+
+
+
+
+prepare-inputs: configurations/exomiser-phenio-all-ingest-13.3.0-lirical/config.yaml corpora/4k/default/config.yaml
+
+
+SQL_DEPENDENCIES_exomiser-phenio-all-ingest-13.3.0-lirical = $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.sql  $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql 
+
+configurations/exomiser-phenio-all-ingest-13.3.0-lirical/config.yaml: $(RUNNERS_DIR)/exomiser-13.3.0 $(SQL_DEPENDENCIES_exomiser-phenio-all-ingest-13.3.0-lirical)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.sql -user sa
+ 
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql -user sa
+ 
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-phenio-all-ingest-13.3.0-lirical/config.yaml
+
+
+
+
+prepare-inputs: configurations/exomiser-phenio-all-ingest-13.3.0-4k/config.yaml corpora/4k/default/config.yaml
+
+
+SQL_DEPENDENCIES_exomiser-phenio-all-ingest-13.3.0-4k = $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.sql  $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql 
+
+configurations/exomiser-phenio-all-ingest-13.3.0-4k/config.yaml: $(RUNNERS_DIR)/exomiser-13.3.0 $(SQL_DEPENDENCIES_exomiser-phenio-all-ingest-13.3.0-4k)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+
+	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
+	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
+	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-hp.0.4.semsimian.sql -user sa
+ 
+	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/2309_phenotype/2309_phenotype -script $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql -user sa
+ 
+
+.PHONY: semsim-ingest
+semsim-ingest: configurations/exomiser-phenio-all-ingest-13.3.0-4k/config.yaml
+
+
+
+
+prepare-inputs: configurations/gado-1.0.1-lirical/config.yaml corpora/4k/default/config.yaml
+
+
+
+
+
+
+configurations/gado-1.0.1-lirical/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 	cp $(RUNNERS_DIR)/configurations/gado-1.0.1.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
@@ -87,13 +199,48 @@ configurations/default-1.0.1/config.yaml:
 
 
 
-prepare-inputs: configurations/default-1.2.3/config.yaml
+prepare-inputs: configurations/gado-1.0.1-4k/config.yaml corpora/4k/default/config.yaml
 
 
 
 
 
-configurations/default-1.2.3/config.yaml:
+
+configurations/gado-1.0.1-4k/config.yaml:
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/gado-1.0.1.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
+
+
+
+
+
+
+prepare-inputs: configurations/phen2gene-1.2.3-lirical/config.yaml corpora/4k/default/config.yaml
+
+
+
+
+
+
+configurations/phen2gene-1.2.3-lirical/config.yaml:
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/phen2gene-1.2.3.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
+
+
+
+
+
+
+
+prepare-inputs: configurations/phen2gene-1.2.3-4k/config.yaml corpora/4k/default/config.yaml
+
+
+
+
+
+
+configurations/phen2gene-1.2.3-4k/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 	cp $(RUNNERS_DIR)/configurations/phen2gene-1.2.3.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
@@ -111,6 +258,11 @@ $(TMP_DATA)/semsim/%.tsv:
 	wget $(SEMSIM_BASE_URL)/$*.tsv -O $@
 
 
+$(TMP_DATA)/semsim/%.sql:
+	mkdir -p $(TMP_DATA)/semsim/
+	wget $(SEMSIM_BASE_URL)/$*.sql -O $@
+
+
 results/run_data.txt:
 	touch $@
 
@@ -122,13 +274,18 @@ results/gene_rank_stats.svg: results/run_data.txt
 pheval-report: results/gene_rank_stats.svg
 
 
-results/default-13.3.0/results.yml: configurations/default-13.3.0/config.yaml corpora/lirical/default/corpus.yml
+results/exomiser-13.3.0-lirical/results.yml: configurations/exomiser-13.3.0-lirical/config.yaml corpora/lirical/default/corpus.yml
+
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/default-13.3.0 \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0-lirical \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
 	 --runner exomiserphevalrunner \
 	 --tmp-dir data/tmp/ \
@@ -139,15 +296,44 @@ results/default-13.3.0/results.yml: configurations/default-13.3.0/config.yaml co
 	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/default-13.3.0/results.yml
+pheval-run: results/exomiser-13.3.0-lirical/results.yml
 
-results/default-14.0.0/results.yml: configurations/default-14.0.0/config.yaml corpora/lirical/default/corpus.yml
+results/exomiser-13.3.0-4k/results.yml: configurations/exomiser-13.3.0-4k/config.yaml corpora/4k/default/corpus.yml
+
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/default-14.0.0 \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0-4k \
+	 --testdata-dir $(ROOT_DIR)/corpora/4k/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.3.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/4k/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-13.3.0-4k/results.yml
+
+results/exomiser-14.0.0-lirical/results.yml: configurations/exomiser-14.0.0-lirical/config.yaml corpora/lirical/default/corpus.yml
+
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-14.0.0-lirical \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
 	 --runner exomiserphevalrunner \
 	 --tmp-dir data/tmp/ \
@@ -158,15 +344,94 @@ results/default-14.0.0/results.yml: configurations/default-14.0.0/config.yaml co
 	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/default-14.0.0/results.yml
+pheval-run: results/exomiser-14.0.0-lirical/results.yml
 
-results/default-1.2.3/results.yml: configurations/default-1.2.3/config.yaml corpora/lirical/default/corpus.yml
+results/exomiser-14.0.0-4k/results.yml: configurations/exomiser-14.0.0-4k/config.yaml corpora/4k/default/corpus.yml
+
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/default-1.2.3 \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-14.0.0-4k \
+	 --testdata-dir $(ROOT_DIR)/corpora/4k/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 14.0.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/4k/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-14.0.0-4k/results.yml
+
+results/exomiser-phenio-all-ingest-13.3.0-lirical/results.yml: configurations/exomiser-phenio-all-ingest-13.3.0-lirical/config.yaml corpora/lirical/default/corpus.yml
+
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-phenio-all-ingest-13.3.0-lirical \
+	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.3.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-phenio-all-ingest-13.3.0-lirical/results.yml
+
+results/exomiser-phenio-all-ingest-13.3.0-4k/results.yml: configurations/exomiser-phenio-all-ingest-13.3.0-4k/config.yaml corpora/4k/default/corpus.yml
+
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/exomiser-phenio-all-ingest-13.3.0-4k \
+	 --testdata-dir $(ROOT_DIR)/corpora/4k/default \
+	 --runner exomiserphevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 13.3.0 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/4k/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/exomiser-phenio-all-ingest-13.3.0-4k/results.yml
+
+results/phen2gene-1.2.3-lirical/results.yml: configurations/phen2gene-1.2.3-lirical/config.yaml corpora/lirical/default/corpus.yml
+
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+	ln -s $(RUNNERS_DIR)/Phen2Gene/* $(ROOT_DIR)/configurations/phen2gene-1.2.3-lirical/
+
+
+
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/phen2gene-1.2.3-lirical \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
 	 --runner phen2genephevalrunner \
 	 --tmp-dir data/tmp/ \
@@ -177,15 +442,46 @@ results/default-1.2.3/results.yml: configurations/default-1.2.3/config.yaml corp
 	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/default-1.2.3/results.yml
+pheval-run: results/phen2gene-1.2.3-lirical/results.yml
 
-results/default-1.0.1/results.yml: configurations/default-1.0.1/config.yaml corpora/lirical/default/corpus.yml
+results/phen2gene-1.2.3-4k/results.yml: configurations/phen2gene-1.2.3-4k/config.yaml corpora/4k/default/corpus.yml
+
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+	ln -s $(RUNNERS_DIR)/Phen2Gene/* $(ROOT_DIR)/configurations/phen2gene-1.2.3-4k/
+
+
+
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/default-1.0.1 \
+	 --input-dir $(ROOT_DIR)/configurations/phen2gene-1.2.3-4k \
+	 --testdata-dir $(ROOT_DIR)/corpora/4k/default \
+	 --runner phen2genephevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 1.2.3 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/4k/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/phen2gene-1.2.3-4k/results.yml
+
+results/gado-1.0.1-lirical/results.yml: configurations/gado-1.0.1-lirical/config.yaml corpora/lirical/default/corpus.yml
+
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/gado-1.0.1-lirical \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
 	 --runner gadophevalrunner \
 	 --tmp-dir data/tmp/ \
@@ -196,7 +492,31 @@ results/default-1.0.1/results.yml: configurations/default-1.0.1/config.yaml corp
 	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/default-1.0.1/results.yml
+pheval-run: results/gado-1.0.1-lirical/results.yml
+
+results/gado-1.0.1-4k/results.yml: configurations/gado-1.0.1-4k/config.yaml corpora/4k/default/corpus.yml
+
+
+
+	rm -rf $(ROOT_DIR)/$(shell dirname $@)
+	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+
+
+
+	pheval run \
+	 --input-dir $(ROOT_DIR)/configurations/gado-1.0.1-4k \
+	 --testdata-dir $(ROOT_DIR)/corpora/4k/default \
+	 --runner gadophevalrunner \
+	 --tmp-dir data/tmp/ \
+	 --version 1.0.1 \
+	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+
+	touch $@
+	echo -e "$(ROOT_DIR)/corpora/4k/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
+
+.PHONY: pheval-run
+pheval-run: results/gado-1.0.1-4k/results.yml
 corpora/lirical/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
@@ -208,30 +528,6 @@ corpora/lirical/default/corpus.yml:
 	touch $@
 
 
-.PHONY: download-exomiser
-download-exomiser: $(addprefix $(RUNNERS_DIR)/exomiser-,$(EXOMISER_VERSIONS))
-
-$(TMP_DATA)/exomiser-cli-%-distribution.zip:
-	mkdir -p $(TMP_DATA)
-	wget https://github.com/exomiser/Exomiser/releases/download/$*/exomiser-cli-$*-distribution.zip -O $@
-
-$(RUNNERS_DIR)/exomiser-%: $(TMP_DATA)/exomiser-cli-%-distribution.zip
-	mkdir -p $(RUNNERS_DIR)
-	unzip $< -d $(RUNNERS_DIR)
-	mv $(RUNNERS_DIR)/exomiser-cli-$* $(RUNNERS_DIR)/exomiser-$*
-	cp $(RUNNERS_DIR)/configurations/preset-exome-analysis.yml $(RUNNERS_DIR)/exomiser-$*/
-
-
-.PHONY: download-phen2gen
-
-download-phen2gen: $(RUNNERS_DIR)/Phen2Gene
-
-$(RUNNERS_DIR)/Phen2Gene:
-	mkdir -p $@
-	cd $@
-	git clone https://github.com/WGLab/Phen2Gene.git $@
-	bash $@/setup.sh
-
 
 .PHONY: pheval
 pheval:
@@ -239,5 +535,11 @@ pheval:
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
 	$(MAKE) pheval-report
+
+.PHONY: all
+all:
+	$(MAKE) setup
+	$(MAKE) download-phenotype
+	$(MAKE) pheval
 
 include ./resources/custom.Makefile

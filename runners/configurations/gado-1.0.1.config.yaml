@@ -4,8 +4,8 @@ variant_analysis: False
 gene_analysis: True
 disease_analysis: False
 tool_specific_configuration_options:
-  gado_jar: ../../runners/gado/GADO.jar
-  hpo_ontology: hp.obo
-  hpo_predictions_info: predictions_auc_bonf.txt
-  genes: hpo_prediction_genes.txt
-  hpo_predictions: genenetwork_bonf_spiked/genenetwork_bonf_spiked.dat
+  gado_jar: ../../runners/gado/GadoCommandline-1.0.1/GADO.jar
+  hpo_ontology: ../../runners/gado/hp.obo
+  hpo_predictions_info: ../../runners/gado/predictions_auc_bonf.txt
+  genes: ../../runners/gado/hpo_prediction_genes.txt
+  hpo_predictions: ../../runners/gado/genenetwork_bonf_spiked/genenetwork_bonf_spiked.dat

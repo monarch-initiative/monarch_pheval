@@ -1,6 +1,6 @@
 tool: exomiser
 tool_version: 13.2.1
-variant_analysis: True
+variant_analysis: False
 gene_analysis: True
 disease_analysis: True
 tool_specific_configuration_options:
