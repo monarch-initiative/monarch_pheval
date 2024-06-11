@@ -37,9 +37,16 @@ info:
 # {%- endif -%}
 
 
+corpora/4k/default/config.yaml: $(TMP_DATA)/all_phenopackets/all_phenopackets.zip
+	mkdir -p corpora/4k/default
+	pheval-utils prepare-corpus -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets --gene-analysis -g ensembl_id -o $(ROOT_DIR)/$(shell dirname $@)/
+	touch $@
+	#temporary
+	touch corpora/4k/default/corpus.yml
+
 
 {%- for config in configs %}
-prepare-inputs: configurations/{{ config.id }}/config.yaml
+prepare-inputs: configurations/{{ config.id }}/config.yaml corpora/4k/default/config.yaml
 
 {% if config.preprocessing is defined %}
 SQL_DEPENDENCIES_{{ config.id }} = {%- for pp in config.preprocessing %} $(TMP_DATA)/semsim/{{ pp }} {%endfor %}
@@ -191,6 +198,7 @@ pheval:
 .PHONY: all
 all:
 	$(MAKE) setup
+	$(MAKE) download-phenotype
 	$(MAKE) pheval
 
 include ./resources/custom.Makefile
