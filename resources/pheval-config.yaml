@@ -7,7 +7,6 @@ corpora:
     custom_variants:
       - id: no_phenotype
 
-
 semsim:
   profiles:
     - subset: hp-mp
@@ -17,7 +16,6 @@ semsim:
       prefixes:
         subject: hp
         object: mp
-
 
 mappings:
   - id: hp
@@ -37,9 +35,11 @@ configs:
     version: 14.0.0
     phenotype: 2402
   - tool: exomiser
-    id: exomiser-phenio-hpmp-ingest-13.3.0
+    id: exomiser-phenio-all-ingest-13.3.0
     preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
       - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
     version: 13.3.0
     phenotype: 2309
   - tool: gado
@@ -64,7 +64,7 @@ runs:
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: exomiser-phenio-hpmp-ingest-13.3.0
+    configuration: exomiser-phenio-all-ingest-13.3.0
   - tool: phen2gene
     corpus: lirical
     corpusvariant: default
