@@ -27,26 +27,8 @@ info:
 
 .PHONY: prepare-inputs
 
-# {% if semsim is defined %}
-# {% for profile in semsim.profiles %}
-
-# # $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.{{ profile.method }}.sql: $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.{{ profile.method }}.tsv
-# # 	pheval-utils semsim-to-exomisersql --input-file $< --subject-prefix {{ profile.prefixes.subject }} --object-prefix {{ profile.prefixes.object }} -o $@
-
-# {% endfor %}
-# {%- endif -%}
-
-
-corpora/4k/default/config.yaml: $(TMP_DATA)/all_phenopackets/all_phenopackets.zip
-	mkdir -p corpora/4k/default
-	pheval-utils prepare-corpus -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets --gene-analysis -g ensembl_id -o $(ROOT_DIR)/$(shell dirname $@)/
-	touch $@
-	#temporary
-	touch corpora/4k/default/corpus.yml
-
-
 {%- for config in configs %}
-prepare-inputs: configurations/{{ config.id }}/config.yaml corpora/4k/default/config.yaml
+prepare-inputs: configurations/{{ config.id }}/config.yaml
 
 {% if config.preprocessing is defined %}
 SQL_DEPENDENCIES_{{ config.id }} = {%- for pp in config.preprocessing %} $(TMP_DATA)/semsim/{{ pp }} {%endfor %}
@@ -88,8 +70,6 @@ configurations/{{ config.id }}/config.yaml:
 	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 {% endif %}
 
-
-
 {% endif %}
 
 {% endfor %}
@@ -123,11 +103,6 @@ results/{{ run.configuration }}/results.yml: configurations/{{ run.configuration
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
-
-{% if  run.tool  == "phen2gene" %}
-	ln -s $(RUNNERS_DIR)/Phen2Gene/* $(ROOT_DIR)/configurations/{{ run.configuration }}/
-{% endif %}
-
 
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/{{ run.configuration }} \
@@ -194,11 +169,5 @@ pheval:
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
 	$(MAKE) pheval-report
-
-.PHONY: all
-all:
-	$(MAKE) setup
-	$(MAKE) download-phenotype
-	$(MAKE) pheval
 
 include ./resources/custom.Makefile
