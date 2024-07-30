@@ -7,6 +7,16 @@ corpora:
     custom_variants:
       - id: no_phenotype
 
+semsim:
+  profiles:
+    - subset: hp-mp
+      method: semsimian
+      ontology: phenio-monarch
+      threshold: 0.4
+      prefixes:
+        subject: hp
+        object: mp
+
 mappings:
   - id: hp
   - id: mp
@@ -17,18 +27,26 @@ ontologies:
 
 configs:
   - tool: exomiser
-    id: default-13.3.0
+    id: exomiser-13.3.0
     version: 13.3.0
     phenotype: 2309
   - tool: exomiser
-    id: default-14.0.0
+    id: exomiser-14.0.0
     version: 14.0.0
     phenotype: 2402
+  - tool: exomiser
+    id: exomiser-phenio-all-ingest-13.3.0
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+    version: 13.3.0
+    phenotype: 2309
   - tool: gado
-    id: default-1.0.1
+    id: gado-1.0.1
     version: 1.0.1
   - tool: phen2gene
-    id: default-1.2.3
+    id: phen2gene-1.2.3
     version: 1.2.3
 
 runs:
@@ -36,19 +54,24 @@ runs:
     corpus: lirical
     corpusvariant: default
     version: 13.3.0
-    configuration: default-13.3.0
+    configuration: exomiser-13.3.0
   - tool: exomiser
     corpus: lirical
     corpusvariant: default
     version: 14.0.0
-    configuration: default-14.0.0
+    configuration: exomiser-14.0.0
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: exomiser-phenio-all-ingest-13.3.0
   - tool: phen2gene
     corpus: lirical
     corpusvariant: default
     version: 1.2.3
-    configuration: default-1.2.3
+    configuration: phen2gene-1.2.3
   - tool: gado
     corpus: lirical
     corpusvariant: default
     version: 1.0.1
-    configuration: default-1.0.1
+    configuration: gado-1.0.1
