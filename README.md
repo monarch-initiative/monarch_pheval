@@ -135,7 +135,7 @@ graph TD;
 
 ---
 
-With this new feature, the Makefile can be generated within this repo, and the user can invoke the `make all` goal based on the [pheval configuration file](resources/pheval-config.yaml).
+With this new feature, the Makefile can be generated within this repo, and the user can invoke the `make pheval` goal based on the [pheval configuration file](resources/pheval-config.yaml).
 
 ## PhEval Config Structure
 
