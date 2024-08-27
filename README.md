@@ -21,7 +21,7 @@
 This experiment was designed with a few PhEval runners, using different VGPAs and versions.
 Additionally, we used several Phenotypic data in the Exomiser database: 2309 and 2402, we also made some experiments calculating the Semantic Similarity Profile as a Mapping Table.
 
-**_Important: All files needed for the experiment will be downloaded using the Makefile strategy. Any file links are for inspection purposes and pipeline explanation only. Remember that the `make all` goal executes the entire pipeline without needing additional steps._**
+**_Important: All files needed for the experiment will be downloaded using the Makefile strategy. Any file links are for inspection purposes and pipeline explanation only. Remember that the `make pheval` goal executes the entire pipeline without needing additional steps._**
 
 - [Exomiser](https://exomiser.readthedocs.io/en/latest/)
   - 13.3.0 (2309 default)
@@ -171,7 +171,7 @@ poetry install
 ### Run the experiment
 
 ```bash
-make all
+make pheval
 ```
 
 ---
