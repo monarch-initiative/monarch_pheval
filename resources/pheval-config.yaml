@@ -2,12 +2,17 @@ directories:
   data: data
   tmp: data/tmp
 
+corpora:
+  - id: lirical
+    custom_variants:
+      - id: no_phenotype
+
 configs:
   - tool: exomiser
     id: exomiser-13.3.0
     version: 13.3.0
     phenotype: 2309
-      
+
 runs:
   - tool: exomiser
     corpus: lirical
