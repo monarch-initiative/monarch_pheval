@@ -3,7 +3,11 @@ SHELL 					:= bash
 .DEFAULT_GOAL			:= help
 URIBASE					:=	http://purl.obolibrary.org/obo
 TMP_DATA				:=	{{ directories.tmp }}
+{% if directories.root is defined %}
+ROOT_DIR				:=	{{ directories.root }}
+{% else %}
 ROOT_DIR				:=	$(shell pwd)
+{% endif %}
 PHENOTYPE_DIR			:= $(ROOT_DIR)/data/phenotype
 RUNNERS_DIR				:= $(ROOT_DIR)/runners
 NAME					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["name"])')
@@ -28,7 +32,6 @@ info:
 .PHONY: prepare-inputs
 
 {%- for config in configs %}
-prepare-inputs: configurations/{{ config.id }}/config.yaml
 
 {% if config.preprocessing is defined %}
 SQL_DEPENDENCIES_{{ config.id }} = {%- for pp in config.preprocessing %} $(TMP_DATA)/semsim/{{ pp }} {%endfor %}
@@ -52,6 +55,7 @@ semsim-ingest: configurations/{{ config.id }}/config.yaml
 
 {% else %}
 
+
 {% if config.phenotype is defined %}
 
 configurations/{{ config.id }}/config.yaml:
@@ -70,6 +74,8 @@ configurations/{{ config.id }}/config.yaml:
 	cp $(RUNNERS_DIR)/configurations/{{ config.tool }}-{{ config.version }}.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 {% endif %}
 
+
+
 {% endif %}
 
 {% endfor %}
@@ -86,23 +92,20 @@ $(TMP_DATA)/semsim/%.sql:
 	wget $(SEMSIM_BASE_URL)/$*.sql -O $@
 
 
-results/run_data.txt:
-	touch $@
-
-results/gene_rank_stats.svg: results/run_data.txt
-	pheval-utils benchmark-comparison -r $< -o $(ROOT_DIR)/$(shell dirname $@)/results --gene-analysis -y bar_cumulative
-	mv $(ROOT_DIR)/gene_rank_stats.svg $@
-
-.PHONY: pheval-report
-pheval-report: results/gene_rank_stats.svg
 
 {% for run in runs %}
-results/{{ run.configuration }}/results.yml: configurations/{{ run.configuration }}/config.yaml corpora/{{ run.corpus }}/{{ run.corpusvariant }}/corpus.yml
+$(ROOT_DIR)/results/{{ run.configuration }}/results.yml: configurations/{{ run.configuration }}/config.yaml corpora/{{ run.corpus }}/{{ run.corpusvariant }}/corpus.yml
 
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
+
+{% if  run.tool  == "phen2gene" %}
+	ln -s $(RUNNERS_DIR)/Phen2Gene/* $(ROOT_DIR)/configurations/{{ run.configuration }}/
+{% endif %}
+
+	mkdir -p $(shell dirname $@)
 
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/{{ run.configuration }} \
@@ -110,13 +113,51 @@ results/{{ run.configuration }}/results.yml: configurations/{{ run.configuration
 	 --runner {{ run.tool }}phevalrunner \
 	 --tmp-dir {{ directories.tmp }}/ \
 	 --version {{ run.version }} \
-	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+	 --output-dir $(shell dirname $@)
 
 	touch $@
-	echo -e "$(ROOT_DIR)/corpora/{{ run.corpus }}/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/{{ run.configuration }}/results.yml
+pheval-run: $(ROOT_DIR)/results/{{ run.configuration }}/results.yml
+
+
+$(ROOT_DIR)/results/{{ run.configuration }}/run_data.yaml:
+	printf '%s\n' \
+	"benchmark_name: fake_predictor_benchmark" \
+	"runs:" \
+	"  - run_identifier: run_identifier_1" \
+	"    results_dir: $(shell dirname $@)" \
+	"    phenopacket_dir: $(ROOT_DIR)/corpora/lirical/default/phenopackets" \
+	"    gene_analysis: True" \
+	"    variant_analysis: False" \
+	"    disease_analysis: False" \
+	"    threshold:" \
+	"    score_order: descending" \
+	"plot_customisation:" \
+	"  gene_plots:" \
+	"    plot_type: bar_cumulative" \
+	"    rank_plot_title:" \
+	"    roc_curve_title: " \
+	"    precision_recall_title: " \
+	"  disease_plots:" \
+	"    plot_type: bar_cumulative" \
+	"    rank_plot_title:" \
+	"    roc_curve_title: " \
+	"    precision_recall_title: " \
+	"  variant_plots:" \
+	"    plot_type: bar_cumulative" \
+	"    rank_plot_title: " \
+	"    roc_curve_title: " \
+	"    precision_recall_title: " \
+	> $@
+
+$(ROOT_DIR)/results/{{ run.configuration }}/gene_rank_stats.svg: $(ROOT_DIR)/results/{{ run.configuration }}/run_data.yaml
+	pheval-utils generate-benchmark-stats -r $<
+
+.PHONY: pheval-report
+pheval-report: $(ROOT_DIR)/results/{{ run.configuration }}/gene_rank_stats.svg
+
+
 {% endfor %}
 
 
@@ -169,5 +210,10 @@ pheval:
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
 	$(MAKE) pheval-report
+
+.PHONY: all
+all:
+	$(MAKE) setup
+	$(MAKE) pheval
 
 include ./resources/custom.Makefile

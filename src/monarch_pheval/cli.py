@@ -1,4 +1,5 @@
 """Command line interface for monarch_pheval."""
+
 import logging
 
 import click

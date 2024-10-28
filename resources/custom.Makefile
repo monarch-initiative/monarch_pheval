@@ -2,34 +2,9 @@
 
 PHENOTYPE_VERSIONS		:=	2309 2402
 EXOMISER_VERSIONS		:=	13.3.0 14.0.0
-PHEVAL_ZENODO_DATA_URL	:=	https://zenodo.org/records/11458312/files/monarch_pheval.tar.gz
-
-
-.PHONY: pheval
-pheval:
-	$(MAKE) setup
-	$(MAKE) download-phenotype
-	$(MAKE) prepare-inputs
-	$(MAKE) prepare-corpora
-	$(MAKE) pheval-run
-	$(MAKE) pheval-report
-
 
 .PHONY: setup
-
-setup: $(TMP_DATA)/monarch_pheval/Makefile
-
-$(TMP_DATA)/monarch_pheval.tar.gz:
-	mkdir -p $(TMP_DATA)
-	wget $(PHEVAL_ZENODO_DATA_URL) -O $@
-
-
-$(TMP_DATA)/monarch_pheval/Makefile: $(TMP_DATA)/monarch_pheval.tar.gz
-	tar -zxvf $< --strip-components 1 --no-same-permissions --exclude="resources" --exclude="Makefile"
-	rm -rf $(ROOT_DIR)/configurations
-
-.PHONY: download
-downloads: download-phenotype download-exomiser download-phen2gen download-gado
+setup: download-phenotype download-exomiser download-phen2gen download-gado
 
 .PHONY: download-phenotype
 download-phenotype: $(addprefix $(PHENOTYPE_DIR)/,$(addsuffix _hg19.sha256,$(PHENOTYPE_VERSIONS))) $(addprefix $(PHENOTYPE_DIR)/,$(addsuffix _hg38.sha256,$(PHENOTYPE_VERSIONS))) $(addprefix $(PHENOTYPE_DIR)/,$(addsuffix _phenotype.sha256,$(PHENOTYPE_VERSIONS)))
@@ -78,13 +53,20 @@ $(RUNNERS_DIR)/gado:
 	wget https://molgenis26.gcc.rug.nl/downloads/genenetwork/v2.1/hp.obo -O $@/hp.obo
 
 
+$(TMP_DATA)/HG001_GRCh37_1_22_v4.2.1_benchmark.vcf.gz:
+	wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/NA12878_HG001/latest/GRCh37/HG001_GRCh37_1_22_v4.2.1_benchmark.vcf.gz -O $@
+	gunzip $@
+
+$(TMP_DATA)/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz:
+	wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/NA12878_HG001/latest/GRCh38/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz -O $@
+	gunzip $@
+
 $(TMP_DATA)/all_phenopackets/all_phenopackets.zip:
 	mkdir -p $(TMP_DATA)/all_phenopackets/
 	wget https://github.com/monarch-initiative/phenopacket-store/releases/download/0.1.12/all_phenopackets.zip -O $@
 	unzip $@ -d $(ROOT_DIR)/$(shell dirname $@)/
 	mkdir -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets
 	mv $(TMP_DATA)/all_phenopackets/*/* $(TMP_DATA)/all_phenopackets/unpacked_phenopackets
-
 
 .PHONY: clean
 clean:
