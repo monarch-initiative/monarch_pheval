@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "monarch_pheval"
-version = "0.0.0"
+version = "0.1.0"
 description = "monarch_pheval"
 authors = ["Vinicius de Souza <souzadevinicius@gmail.com>"]
 license = "MIT"
@@ -78,6 +78,13 @@ count = ""
 quiet-level = 3
 # ignore-words-list = ""
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "poetry"
+update_changelog_on_bump = true
+major_version_zero = true
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry_dynamic_versioning.backend"
