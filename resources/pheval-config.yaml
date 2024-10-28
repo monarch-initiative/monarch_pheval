@@ -8,14 +8,13 @@ corpora:
       - id: no_phenotype
 
 configs:
-  - tool: exomiser
-    id: exomiser-13.3.0
-    version: 13.3.0
-    phenotype: 2309
+  - tool: template
+    id: template-1.0.0
+    version: 1.0.0
 
 runs:
-  - tool: exomiser
+  - tool: template
     corpus: lirical
-    corpusvariant: small_version
-    version: 13.3.0
-    configuration: exomiser-13.3.0
+    corpusvariant: default
+    version: 1.0.0
+    configuration: template-1.0.0

@@ -3,7 +3,9 @@ SHELL 					:= bash
 .DEFAULT_GOAL			:= help
 URIBASE					:=	http://purl.obolibrary.org/obo
 TMP_DATA				:=	data/tmp
+
 ROOT_DIR				:=	$(shell pwd)
+
 PHENOTYPE_DIR			:= $(ROOT_DIR)/data/phenotype
 RUNNERS_DIR				:= $(ROOT_DIR)/runners
 NAME					:= $(shell python -c 'import tomli; print(tomli.load(open("pyproject.toml", "rb"))["tool"]["poetry"]["name"])')
@@ -26,21 +28,17 @@ info:
 	@echo "Version: $(VERSION)"
 
 .PHONY: prepare-inputs
-prepare-inputs: configurations/exomiser-13.3.0/config.yaml
 
 
 
 
 
-configurations/exomiser-13.3.0/config.yaml:
+
+configurations/template-1.0.0/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
+	cp $(RUNNERS_DIR)/configurations/template-1.0.0.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	cp -rf $(PHENOTYPE_DIR)/2309_phenotype $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype
-	cp $(RUNNERS_DIR)/configurations/exomiser-13.3.0-2309_phenotype.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
 
-	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg19  || ln -s $(PHENOTYPE_DIR)/2309_hg19 $(ROOT_DIR)/$(shell dirname $@)/
-	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_hg38 || ln -s $(PHENOTYPE_DIR)/2309_hg38 $(ROOT_DIR)/$(shell dirname $@)/
-	test -L $(ROOT_DIR)/$(shell dirname $@)/2309_phenotype || ln -s $(RUNNERS_DIR)/exomiser-13.3.0/* $(ROOT_DIR)/$(shell dirname $@)/
 
 
 
@@ -59,37 +57,70 @@ $(TMP_DATA)/semsim/%.sql:
 	wget $(SEMSIM_BASE_URL)/$*.sql -O $@
 
 
-results/run_data.txt:
-	touch $@
-
-results/gene_rank_stats.svg: results/run_data.txt
-	pheval-utils benchmark-comparison -r $< -o $(ROOT_DIR)/$(shell dirname $@)/results --gene-analysis -y bar_cumulative
-	mv $(ROOT_DIR)/gene_rank_stats.svg $@
-
-.PHONY: pheval-report
-pheval-report: results/gene_rank_stats.svg
 
 
-results/exomiser-13.3.0/results.yml: configurations/exomiser-13.3.0/config.yaml corpora/lirical/small_version/corpus.yml
+$(ROOT_DIR)/results/template-1.0.0/results.yml: configurations/template-1.0.0/config.yaml corpora/lirical/default/corpus.yml
 
 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
 
+
+
+	mkdir -p $(shell dirname $@)
+
 	pheval run \
-	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0 \
-	 --testdata-dir $(ROOT_DIR)/corpora/lirical/small_version \
-	 --runner exomiserphevalrunner \
+	 --input-dir $(ROOT_DIR)/configurations/template-1.0.0 \
+	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
+	 --runner templatephevalrunner \
 	 --tmp-dir data/tmp/ \
-	 --version 13.3.0 \
-	 --output-dir $(ROOT_DIR)/$(shell dirname $@)
+	 --version 1.0.0 \
+	 --output-dir $(shell dirname $@)
 
 	touch $@
-	echo -e "$(ROOT_DIR)/corpora/lirical/default/phenopackets\t$(ROOT_DIR)/$(shell dirname $@)" >> results/run_data.txt
 
 .PHONY: pheval-run
-pheval-run: results/exomiser-13.3.0/results.yml
+pheval-run: $(ROOT_DIR)/results/template-1.0.0/results.yml
+
+
+$(ROOT_DIR)/results/template-1.0.0/run_data.yaml:
+	printf '%s\n' \
+	"benchmark_name: fake_predictor_benchmark" \
+	"runs:" \
+	"  - run_identifier: run_identifier_1" \
+	"    results_dir: $(shell dirname $@)" \
+	"    phenopacket_dir: $(ROOT_DIR)/corpora/lirical/default/phenopackets" \
+	"    gene_analysis: True" \
+	"    variant_analysis: False" \
+	"    disease_analysis: False" \
+	"    threshold:" \
+	"    score_order: descending" \
+	"plot_customisation:" \
+	"  gene_plots:" \
+	"    plot_type: bar_cumulative" \
+	"    rank_plot_title:" \
+	"    roc_curve_title: " \
+	"    precision_recall_title: " \
+	"  disease_plots:" \
+	"    plot_type: bar_cumulative" \
+	"    rank_plot_title:" \
+	"    roc_curve_title: " \
+	"    precision_recall_title: " \
+	"  variant_plots:" \
+	"    plot_type: bar_cumulative" \
+	"    rank_plot_title: " \
+	"    roc_curve_title: " \
+	"    precision_recall_title: " \
+	> $@
+
+$(ROOT_DIR)/results/template-1.0.0/gene_rank_stats.svg: $(ROOT_DIR)/results/template-1.0.0/run_data.yaml
+	pheval-utils generate-benchmark-stats -r $<
+
+.PHONY: pheval-report
+pheval-report: $(ROOT_DIR)/results/template-1.0.0/gene_rank_stats.svg
+
+
 corpora/lirical/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
@@ -108,5 +139,10 @@ pheval:
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
 	$(MAKE) pheval-report
+
+.PHONY: all
+all:
+	$(MAKE) setup
+	$(MAKE) pheval
 
 include ./resources/custom.Makefile

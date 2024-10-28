@@ -12,12 +12,12 @@ click = "*"
 importlib-metadata = "^4.8.0"
 tomli = "^2.0.1"
 j2cli = "^0.3.10"
-pheval = {git = "https://github.com/monarch-initiative/pheval.git"}
-pheval-exomiser = "^0.2.0"
-pheval-gado = "^0.1.0"
-pheval-phen2gene = "^0.1.1"
+pheval = "^0.4.1"
+
 
 [tool.poetry.group.dev.dependencies]
+pheval-template = "^0.1.2"
+pytest-workflow = "^2.0.1"
 pytest = {version = ">=7.1.2"}
 tox = {version = ">=3.25.1"}
 pre-commit = {version = ">=3.3.3"}
