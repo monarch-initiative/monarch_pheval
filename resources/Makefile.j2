@@ -167,7 +167,7 @@ corpora/{{ corpus.id }}/default/corpus.yml:
 
 	test -L $(ROOT_DIR)/corpora/{{ corpus.id }}/default/template_exome_hg19.vcf.gz || ln -s $(ROOT_DIR)/testdata/template_vcf/template_exome_hg19.vcf.gz $(ROOT_DIR)/corpora/{{ corpus.id }}/default/template_exome_hg19.vcf.gz
 	pheval-utils create-spiked-vcfs \
-	 --template-vcf-path $(ROOT_DIR)/corpora/{{ corpus.id }}/default/template_exome_hg19.vcf.gz  \
+	 --hg19-template-vcf $(ROOT_DIR)/corpora/{{ corpus.id }}/default/template_exome_hg19.vcf.gz  \
 	 --phenopacket-dir=$(ROOT_DIR)/corpora/{{ corpus.id }}/default/phenopackets \
 	 --output-dir $(ROOT_DIR)/corpora/{{ corpus.id }}/default/vcf
 	touch $@
@@ -179,7 +179,7 @@ corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml: corpora/{{ 
 	test -L $(ROOT_DIR)/corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/template_exome_hg19.vcf.gz || ln -s $(ROOT_DIR)/testdata/template_vcf/template_exome_hg19.vcf.gz $(ROOT_DIR)/corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/template_exome_hg19.vcf.gz
 
 	pheval-utils create-spiked-vcfs \
-	 --template-vcf-path $(ROOT_DIR)/corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/template_exome_hg19.vcf.gz  \
+	 --hg19-template-vcf $(ROOT_DIR)/corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/template_exome_hg19.vcf.gz  \
 	 --phenopacket-dir=$(shell dirname $<)/phenopackets \
 	 --output-dir $(ROOT_DIR)/$(shell dirname $@)/vcf
 

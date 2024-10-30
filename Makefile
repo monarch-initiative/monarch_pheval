@@ -126,7 +126,7 @@ corpora/lirical/default/corpus.yml:
 
 	test -L $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz || ln -s $(ROOT_DIR)/testdata/template_vcf/template_exome_hg19.vcf.gz $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz
 	pheval-utils create-spiked-vcfs \
-	 --template-vcf-path $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz  \
+	 --hg19-template-vcf $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz  \
 	 --phenopacket-dir=$(ROOT_DIR)/corpora/lirical/default/phenopackets \
 	 --output-dir $(ROOT_DIR)/corpora/lirical/default/vcf
 	touch $@
