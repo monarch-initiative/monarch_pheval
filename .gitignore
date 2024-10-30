@@ -133,6 +133,7 @@ configurations/
 runners/
 !runners/configurations/exomiser-13.1.0.config.yaml
 !runners/configurations/preset-exome-analysis.yml
+!runners/configurations/template-1.0.0.config.yaml
 results/
 corpora/lirical/default/corpus.yml
 corpora/lirical/default/vcf/
