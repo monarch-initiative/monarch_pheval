@@ -76,7 +76,7 @@ jobs:
       - name: Run tests
         run: |
           poetry run pip install -U pytest
-          poetry run python -m pytest tests/ --basetemp=./pytest_temp
+          poetry run python -m pytest tests/ --basetemp=$RUNNER_TEMP
 
       #----------------------------------------------
       #           upload coverage results
