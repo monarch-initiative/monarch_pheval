@@ -27,16 +27,6 @@ info:
 
 .PHONY: prepare-inputs
 
-# {% if semsim is defined %}
-# {% for profile in semsim.profiles %}
-
-# # $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.{{ profile.method }}.sql: $(TMP_DATA)/semsim/{{ profile.ontology }}-{{ profile.prefixes.subject }}-{{ profile.prefixes.object }}.{{ profile.threshold }}.{{ profile.method }}.tsv
-# # 	pheval-utils semsim-to-exomisersql --input-file $< --subject-prefix {{ profile.prefixes.subject }} --object-prefix {{ profile.prefixes.object }} -o $@
-
-# {% endfor %}
-# {%- endif -%}
-
-
 
 {%- for config in configs %}
 prepare-inputs: configurations/{{ config.id }}/config.yaml
@@ -62,6 +52,7 @@ configurations/{{ config.id }}/config.yaml: $(RUNNERS_DIR)/exomiser-{{ config.ve
 semsim-ingest: configurations/{{ config.id }}/config.yaml
 
 {% else %}
+
 
 {% if config.phenotype is defined %}
 
@@ -117,11 +108,6 @@ results/{{ run.configuration }}/results.yml: configurations/{{ run.configuration
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
 
-{% if  run.tool  == "phen2gene" %}
-	ln -s $(RUNNERS_DIR)/Phen2Gene/* $(ROOT_DIR)/configurations/{{ run.configuration }}/
-{% endif %}
-
-
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/{{ run.configuration }} \
 	 --testdata-dir $(ROOT_DIR)/corpora/{{ run.corpus }}/{{ run.corpusvariant }} \
@@ -139,6 +125,9 @@ pheval-run: results/{{ run.configuration }}/results.yml
 
 
 {%- for corpus in corpora -%}
+
+{% if  corpus.id  == "lirical" %}
+
 corpora/{{ corpus.id }}/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/{{ corpus.id }}/default/ || mkdir -p $(ROOT_DIR)/corpora/{{ corpus.id }}/default/
 
@@ -148,6 +137,18 @@ corpora/{{ corpus.id }}/default/corpus.yml:
 	 --phenopacket-dir=$(ROOT_DIR)/corpora/{{ corpus.id }}/default/phenopackets \
 	 --output-dir $(ROOT_DIR)/corpora/{{ corpus.id }}/default/vcf
 	touch $@
+{% endif %}
+
+{% if  corpus.id  == "phenopacket-store" %}
+
+corpora/{{ corpus.id  }}/default/corpus.yml: $(TMP_DATA)/all_phenopackets/all_phenopackets.zip
+	mkdir -p corpora/{ corpus.id }/default
+	pheval-utils prepare-corpus -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets --gene-analysis -g ensembl_id -o $(ROOT_DIR)/$(shell dirname $@)/
+	touch $@
+	#temporary
+	touch $@
+{% endif %}
+
 
 {%- if corpus.scrambled is defined -%}
 {%- for scrambled in corpus.scrambled -%}
@@ -168,8 +169,12 @@ corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml: corpora/{{ 
 
 	touch $@
 
-prepare-corpora: corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml
+{%- endfor -%}
 
+
+prepare-corpora: 
+{%- for scrambled in corpus.scrambled -%}
+	$(MAKE) corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml
 {%- endfor -%}
 
 {% for custom_corpus in corpus.custom_variants -%}
@@ -187,10 +192,5 @@ pheval:
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
 	$(MAKE) pheval-report
-
-.PHONY: all
-all:
-	$(MAKE) setup
-	$(MAKE) pheval
 
 include ./resources/custom.Makefile

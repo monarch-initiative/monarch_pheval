@@ -26,16 +26,8 @@ info:
 	@echo "Version: $(VERSION)"
 
 .PHONY: prepare-inputs
-
-# 
-# 
-
-# # $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.sql: $(TMP_DATA)/semsim/phenio-monarch-hp-mp.0.4.semsimian.tsv
-# # 	pheval-utils semsim-to-exomisersql --input-file $< --subject-prefix hp --object-prefix mp -o $@
-
-# 
-#
 prepare-inputs: configurations/exomiser-13.3.0/config.yaml
+
 
 
 
@@ -58,6 +50,7 @@ configurations/exomiser-13.3.0/config.yaml:
 
 
 prepare-inputs: configurations/exomiser-14.0.0/config.yaml
+
 
 
 
@@ -112,6 +105,7 @@ prepare-inputs: configurations/gado-1.0.1/config.yaml
 
 
 
+
 configurations/gado-1.0.1/config.yaml:
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
 	cp $(RUNNERS_DIR)/configurations/gado-1.0.1.config.yaml $(ROOT_DIR)/$(shell dirname $@)/config.yaml
@@ -123,6 +117,7 @@ configurations/gado-1.0.1/config.yaml:
 
 
 prepare-inputs: configurations/phen2gene-1.2.3/config.yaml
+
 
 
 
@@ -169,9 +164,6 @@ results/exomiser-13.3.0/results.yml: configurations/exomiser-13.3.0/config.yaml 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
 
-
-
-
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/exomiser-13.3.0 \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
@@ -192,9 +184,6 @@ results/exomiser-14.0.0/results.yml: configurations/exomiser-14.0.0/config.yaml 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
-
-
-
 
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/exomiser-14.0.0 \
@@ -217,9 +206,6 @@ results/exomiser-phenio-all-ingest-13.3.0/results.yml: configurations/exomiser-p
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
 
-
-
-
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/exomiser-phenio-all-ingest-13.3.0 \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
@@ -240,11 +226,6 @@ results/phen2gene-1.2.3/results.yml: configurations/phen2gene-1.2.3/config.yaml 
 
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
-
-
-	ln -s $(RUNNERS_DIR)/Phen2Gene/* $(ROOT_DIR)/configurations/phen2gene-1.2.3/
-
-
 
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/phen2gene-1.2.3 \
@@ -267,9 +248,6 @@ results/gado-1.0.1/results.yml: configurations/gado-1.0.1/config.yaml corpora/li
 	rm -rf $(ROOT_DIR)/$(shell dirname $@)
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)
 
-
-
-
 	pheval run \
 	 --input-dir $(ROOT_DIR)/configurations/gado-1.0.1 \
 	 --testdata-dir $(ROOT_DIR)/corpora/lirical/default \
@@ -283,6 +261,8 @@ results/gado-1.0.1/results.yml: configurations/gado-1.0.1/config.yaml corpora/li
 
 .PHONY: pheval-run
 pheval-run: results/gado-1.0.1/results.yml
+
+
 corpora/lirical/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
@@ -295,16 +275,14 @@ corpora/lirical/default/corpus.yml:
 
 
 
+
+
+
 .PHONY: pheval
 pheval:
 	$(MAKE) prepare-inputs
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
 	$(MAKE) pheval-report
-
-.PHONY: all
-all:
-	$(MAKE) setup
-	$(MAKE) pheval
 
 include ./resources/custom.Makefile
