@@ -4,17 +4,85 @@ directories:
 
 corpora:
   - id: lirical
+    variant: default
+    custom_variants:
+      - id: no_phenotype
+  - id: lirical
+    variant: small_version
     custom_variants:
       - id: no_phenotype
 
 configs:
-  - tool: template
-    id: template-1.0.0
-    version: 1.0.0
+  - tool: exomiser
+    id: exomiser-13.3.0
+    version: 13.3.0
+    phenotype: 2309
+  - tool: exomiser
+    id: exomiser-14.0.0
+    version: 14.0.0
+    phenotype: 2402
+  - tool: exomiser
+    id: exomiser-13.3.0-C1
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp-truncate.sql
+      - phenio-monarch-hp-zp-truncate.sql
+  - tool: exomiser
+    id: exomiser-13.3.0-C2
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp-truncate.sql
+  - tool: exomiser
+    id: exomiser-13.3.0-C3
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+  - tool: exomiser
+    id: exomiser-13.3.0-C5
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp-truncate.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+
 
 runs:
   - tool: template
     corpus: lirical
-    corpusvariant: default
-    version: 1.0.0
-    configuration: template-1.0.0
+    corpusvariant: small_version
+    version: 13.3.0
+    configuration: exomiser-13.3.0
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: small_version
+    version: 14.0.0
+    configuration: exomiser-14.0.0
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: small_version
+    version: 13.0.0
+    configuration: exomiser-13.3.0-C1
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: small_version
+    version: 13.0.0
+    configuration: exomiser-13.3.0-C2
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: small_version
+    version: 13.0.0
+    configuration: exomiser-13.3.0-C3
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: small_version
+    version: 13.0.0
+    configuration: exomiser-13.3.0-C5

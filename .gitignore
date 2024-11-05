@@ -141,3 +141,5 @@ results-gene_summary.tsv
 .vscode/
 .nextflow
 work
+corpora/
+./results*.tsv
