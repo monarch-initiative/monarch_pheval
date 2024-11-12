@@ -596,9 +596,4 @@ pheval:
 	$(MAKE) pheval-run
 	#$(MAKE) pheval-report
 
-.PHONY: all
-all:
-	$(MAKE) setup
-	$(MAKE) pheval
-
 include ./resources/custom.Makefile
