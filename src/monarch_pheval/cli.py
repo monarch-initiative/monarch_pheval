@@ -4,8 +4,7 @@ import logging
 
 import click
 
-from monarch_pheval import __version__
-from monarch_pheval.cli_pharapheval import execute
+from monarch_pheval.cli_parapheval import execute
 
 info_log = logging.getLogger("info")
 
@@ -14,11 +13,13 @@ info_log = logging.getLogger("info")
 @click.option("-v", "--verbose", count=True)
 @click.option("-q", "--quiet")
 def main(verbose=1, quiet=False) -> None:
-    """main CLI method for MonarchPhEval
+    """
+    execute main CLI method for MonarchPhEval.
 
     Args:
         verbose (int, optional): Verbose flag.
         quiet (bool, optional): Queit Flag.
+
     """
     if verbose >= 2:
         info_log.setLevel(level=logging.DEBUG)
@@ -31,7 +32,6 @@ def main(verbose=1, quiet=False) -> None:
 
 
 main.add_command(execute)
-
 
 
 if __name__ == "__main__":

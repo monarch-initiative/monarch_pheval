@@ -71,3 +71,4 @@ $(TMP_DATA)/all_phenopackets/all_phenopackets.zip:
 .PHONY: clean
 clean:
 	rm -rf $(RUNNERS_DIR) $(TMP_DATA)
+	
