@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "monarch_pheval"
-version = "0.1.0"
+version = "0.1.1"
 description = "monarch_pheval"
 authors = ["Vinicius de Souza <souzadevinicius@gmail.com>"]
 license = "MIT"
@@ -13,7 +13,7 @@ importlib-metadata = "^4.8.0"
 tomli = "^2.0.1"
 j2cli = "^0.3.10"
 pheval = "^0.4.1"
-
+pyyaml = "^6.0.2"
 
 [tool.poetry.group.dev.dependencies]
 pheval-template = "^0.1.2"
@@ -36,7 +36,7 @@ myst-parser = {version = ">=0.18.1"}
 monarch_pheval = "monarch_pheval.cli:main"
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
 
