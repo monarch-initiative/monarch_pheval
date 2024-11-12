@@ -63,10 +63,10 @@ $(TMP_DATA)/HG001_GRCh38_1_22_v4.2.1_benchmark.vcf.gz:
 
 $(TMP_DATA)/all_phenopackets/all_phenopackets.zip:
 	mkdir -p $(TMP_DATA)/all_phenopackets/
-	wget https://github.com/monarch-initiative/phenopacket-store/releases/download/0.1.12/all_phenopackets.zip -O $@
+	wget https://github.com/monarch-initiative/phenopacket-store/releases/download/0.1.21/all_phenopackets.zip -O $@
 	unzip $@ -d $(ROOT_DIR)/$(shell dirname $@)/
 	mkdir -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets
-	mv $(TMP_DATA)/all_phenopackets/*/* $(TMP_DATA)/all_phenopackets/unpacked_phenopackets
+	find $(TMP_DATA)/all_phenopackets/ -iname '*.json' -exec cp {} $(TMP_DATA)/all_phenopackets/unpacked_phenopackets \;
 
 .PHONY: clean
 clean:

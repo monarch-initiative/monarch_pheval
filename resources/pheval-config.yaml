@@ -11,6 +11,10 @@ corpora:
     variant: small_version
     custom_variants:
       - id: no_phenotype
+  - id: phenopacket-store
+    variant: default
+    custom_variants:
+      - id: no_phenotype
 
 configs:
   - tool: exomiser
@@ -21,6 +25,34 @@ configs:
     id: exomiser-14.0.0
     version: 14.0.0
     phenotype: 2402
+    #S00
+  - tool: exomiser
+    id: exomiser-13.3.0-S01-lattice
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+    #S01 - EQUIVALENT
+  - tool: exomiser
+    id: exomiser-13.3.0-S02-equivalent
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-equivalent-hp-hp.0.4.semsimian.sql
+      - phenio-equivalent-hp-mp.0.4.semsimian.sql
+      - phenio-equivalent-hp-zp.0.4.semsimian.sql
+    #S02 - FLAT
+  - tool: exomiser
+    id: exomiser-13.3.0-S03-flat
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-flat-hp-hp.0.4.semsimian.sql
+      - phenio-flat-hp-mp.0.4.semsimian.sql
+      - phenio-flat-hp-zp.0.4.semsimian.sql
+      #########################C#####################
   - tool: exomiser
     id: exomiser-13.3.0-C1
     version: 13.3.0
@@ -56,33 +88,59 @@ configs:
 
 
 runs:
-  - tool: template
-    corpus: lirical
-    corpusvariant: small_version
-    version: 13.3.0
-    configuration: exomiser-13.3.0
   - tool: exomiser
     corpus: lirical
-    corpusvariant: small_version
+    corpusvariant: default
     version: 14.0.0
     configuration: exomiser-14.0.0
   - tool: exomiser
     corpus: lirical
-    corpusvariant: small_version
-    version: 13.0.0
+    corpusvariant: default
+    version: 13.3.0
     configuration: exomiser-13.3.0-C1
   - tool: exomiser
     corpus: lirical
-    corpusvariant: small_version
-    version: 13.0.0
+    corpusvariant: default
+    version: 13.3.0
     configuration: exomiser-13.3.0-C2
   - tool: exomiser
     corpus: lirical
-    corpusvariant: small_version
-    version: 13.0.0
+    corpusvariant: default
+    version: 13.3.0
     configuration: exomiser-13.3.0-C3
   - tool: exomiser
     corpus: lirical
-    corpusvariant: small_version
-    version: 13.0.0
+    corpusvariant: default
+    version: 13.3.0
     configuration: exomiser-13.3.0-C5
+  #S01
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: exomiser-13.3.0-S01-lattice
+  #S02
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: exomiser-13.3.0-S02-equivalent
+  #S03
+  - tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: exomiser-13.3.0-S03-flat
+
+
+
+
+##### PHENOPACKETS STORE
+
+
+  - tool: exomiser
+    corpus: phenopacket-store
+    corpusvariant: default
+    version: 14.0.0
+    configuration: exomiser-14.0.0
+

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 RESOURCE='resources/Makefile.j2'
 CONFIG='resources/pheval-config.yaml'
 OUTPUT='Makefile'
