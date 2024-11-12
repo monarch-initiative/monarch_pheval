@@ -29,7 +29,7 @@ def get_user_jobs() -> List:
     """
     username = os.getenv("USER")
     command = f"squeue -u {username} -o '%A %j %T %M %l %R'"
-    result = subprocess.run(command, capture_output=True, text=True, shell=False)
+    result = subprocess.run(command, capture_output=True, text=True, shell=True)
     if result.returncode != 0:
         logging.error(f"Error running squeue: {result.stderr}")
         return
@@ -69,7 +69,7 @@ def submit_job(id: str, template: Path, submitted_file: Path):
     shutil.copy(f"./jobs/{id}.Makefile", "./Makefile")
     cmd = f"sbatch {template}"
     logging.info(f"running {id}")
-    result = subprocess.run(cmd, shell=False, capture_output=True, text=True)
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     if result.returncode != 0:
         logging.error(f"Error running sbatch: {result.stderr}")
         return
@@ -143,7 +143,7 @@ def generate_makefile(id: str = None):
         ],
         capture_output=True,
         text=True,
-        shell=False,
+        shell=True,
     )
 
 
@@ -177,7 +177,7 @@ def execute_job(template_job: Path, max_jobs: int = -1, force: bool = False):
             split_runs(data, id)
             generate_makefile(id)
             check_last_job_running()
-            submit_job(id=id, template=template_job, submitted_file=submitted_file, force=force)
+            submit_job(id=id, template=template_job, submitted_file=submitted_file)
             # backing to the original makefile
             # shutil.copy('./jobs/original.Makefile', './Makefile')
             logging.info("waiting job start (2 minutes)")
