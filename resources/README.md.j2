@@ -1,0 +1,44 @@
+# Data Processing Report
+
+## Directories
+- **Data Directory:** `{{ directories.data }}`
+- **Temporary Directory:** `{{ directories.tmp }}`
+
+---
+
+## Corpora
+{% for corpus in corpora %}
+### Corpus: {{ corpus.id }} (Variant: {{ corpus.variant }})
+- **Custom Variants:**
+  {% for custom in corpus.custom_variants %}- {{ custom.id }}{% endfor %}
+{% endfor %}
+
+---
+
+## Configurations
+{% for config in configs %}
+### {{ config.name }}
+- **Configuration ID:** `{{ config.id }}`
+- **Tool:** {{ config.tool }} ({{ config.version }})
+{% if 'phenotype' in config %}- **Phenotype Database Version:** {{ config.phenotype }}{% endif %}
+{% if 'preprocessing' in config %}
+- **Preprocessing queries for phenotype database:**
+  {% for step in config.preprocessing %}- `{{ step }}`
+  {% endfor %}
+{% endif -%}
+{% endfor -%}
+
+---
+
+## Runs
+{% set config_versions = {} -%}
+{% for config in configs -%}
+    {% set _ = config_versions.update({config.id: config.version}) -%}
+{% endfor -%}
+
+{%- for run in runs %}
+### {{ run.name }}
+- **Tool:** {{ run.tool }} ({{ config_versions[run.configuration] }})
+- **Configuration Used:** `{{ run.configuration }}`
+- **Corpus:** {{ run.corpus }} (Variant: {{ run.corpusvariant }})
+{% endfor -%}

@@ -27,9 +27,73 @@ configs:
     id: exomiser-14.0.0
     version: 14.0.0
     phenotype: 2402
-  - name: S01 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.7 threshold
+  - name: S01 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.4 threshold
     tool: exomiser
     id: S01
+    # TODO: Change to latest Exomiser version for all!
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+  - name: S02 - Exomiser 13 with semantic similarity profiles (PHENIO Equivalent), 0.4 threshold
+    tool: exomiser
+    id: S02
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-equivalent-hp-hp.0.4.semsimian.sql
+      - phenio-equivalent-hp-mp.0.4.semsimian.sql
+      - phenio-equivalent-hp-zp.0.4.semsimian.sql
+  - name: S03 - Exomiser 13 with semantic similarity profiles (PHENIO Flat), 0.4 threshold
+    tool: exomiser
+    id: S03
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-flat-hp-hp.0.4.semsimian.sql
+      - phenio-flat-hp-mp.0.4.semsimian.sql
+      - phenio-flat-hp-zp.0.4.semsimian.sql
+  - name: S04 - Exomiser 13 with semantic similarity profiles (PHENIO Release), 0.4 threshold
+    tool: exomiser
+    id: S04
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-release-hp-hp.0.4.semsimian.sql
+      - phenio-release-hp-mp.0.4.semsimian.sql
+      - phenio-release-hp-zp.0.4.semsimian.sql
+  - name: C01 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.4 threshold, only HP
+    tool: exomiser
+    id: C01
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp-truncate.sql
+      - phenio-monarch-hp-zp-truncate.sql
+  - name: C02 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.4 threshold, only HP, MP
+    tool: exomiser
+    id: C02
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.sql
+      - phenio-monarch-hp-zp-truncate.sql
+  - name: C05 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.4 threshold, only HP, ZP
+    tool: exomiser
+    id: C05
+    version: 13.3.0
+    phenotype: 2309
+    preprocessing:
+      - phenio-monarch-hp-hp.0.4.semsimian.sql
+      - phenio-monarch-hp-mp-truncate.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.sql
+  - name: I01 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.7 threshold
+    tool: exomiser
+    id: I01
     # TODO: Change to latest Exomiser version for all!
     version: 13.3.0
     phenotype: 2309
@@ -37,60 +101,17 @@ configs:
       - phenio-monarch-hp-hp.0.7.semsimian.sql
       - phenio-monarch-hp-mp.0.7.semsimian.sql
       - phenio-monarch-hp-zp.0.7.semsimian.sql
-  - name: S02 - Exomiser 13 with semantic similarity profiles (PHENIO Equivalent), 0.7 threshold
+  - name: I02 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.4 threshold, IC scores
     tool: exomiser
-    id: S02
+    id: I02
+    # TODO: Change to latest Exomiser version for all!
     version: 13.3.0
     phenotype: 2309
     preprocessing:
-      - phenio-equivalent-hp-hp.0.7.semsimian.sql
-      - phenio-equivalent-hp-mp.0.7.semsimian.sql
-      - phenio-equivalent-hp-zp.0.7.semsimian.sql
-  - name: S03 - Exomiser 13 with semantic similarity profiles (PHENIO Flat), 0.7 threshold
-    tool: exomiser
-    id: S03
-    version: 13.3.0
-    phenotype: 2309
-    preprocessing:
-      - phenio-flat-hp-hp.0.7.semsimian.sql
-      - phenio-flat-hp-mp.0.7.semsimian.sql
-      - phenio-flat-hp-zp.0.7.semsimian.sql
-  - name: S04 - Exomiser 13 with semantic similarity profiles (PHENIO Release), 0.7 threshold
-    tool: exomiser
-    id: S04
-    version: 13.3.0
-    phenotype: 2309
-    preprocessing:
-      - phenio-release-hp-hp.0.7.semsimian.sql
-      - phenio-release-hp-mp.0.7.semsimian.sql
-      - phenio-release-hp-zp.0.7.semsimian.sql
-  - name: C01 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.7 threshold, only HP
-    tool: exomiser
-    id: C01
-    version: 13.3.0
-    phenotype: 2309
-    preprocessing:
-      - phenio-monarch-hp-hp.0.7.semsimian.sql
-      - phenio-monarch-hp-mp-truncate.sql
-      - phenio-monarch-hp-zp-truncate.sql
-  - name: C02 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.7 threshold, only HP, MP
-    tool: exomiser
-    id: C02
-    version: 13.3.0
-    phenotype: 2309
-    preprocessing:
-      - phenio-monarch-hp-hp.0.7.semsimian.sql
-      - phenio-monarch-hp-mp.0.7.semsimian.sql
-      - phenio-monarch-hp-zp-truncate.sql
-  - name: C05 - Exomiser 13 with semantic similarity profiles (PHENIO Monarch), 0.7 threshold, only HP, ZP
-    tool: exomiser
-    id: C05
-    version: 13.3.0
-    phenotype: 2309
-    preprocessing:
-      - phenio-monarch-hp-hp.0.7.semsimian.sql
-      - phenio-monarch-hp-mp-truncate.sql
-      - phenio-monarch-hp-zp.0.7.semsimian.sql
+      - phenio-monarch-hp-hp.0.4.semsimian.ic.sql
+      - phenio-monarch-hp-mp.0.4.semsimian.ic.sql
+      - phenio-monarch-hp-zp.0.4.semsimian.ic.sql
+
 
 ## VINI ADD C4!
 
@@ -152,6 +173,18 @@ runs:
     corpusvariant: default
     version: 13.3.0
     configuration: S04
+  - name: I01 on LIRICAL Corpus
+    tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: I01
+  - name: I02 on LIRICAL Corpus
+    tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: I02
 
 
 
@@ -212,4 +245,15 @@ runs:
     corpusvariant: default
     version: 13.3.0
     configuration: S04
-
+  - name: I01 on Phenopacket Store Corpus
+    tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: I01
+  - name: I02 on Phenopacket Store Corpus
+    tool: exomiser
+    corpus: lirical
+    corpusvariant: default
+    version: 13.3.0
+    configuration: I02

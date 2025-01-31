@@ -91,7 +91,10 @@ $(TMP_DATA)/semsim/%.sql:
 	mkdir -p $(TMP_DATA)/semsim/
 	wget $(SEMSIM_BASE_URL)/$*.sql -O $@
 
-
+{% set config_versions = {} %}
+{% for config in configs %}
+    {% set _ = config_versions.update({config.id: config.version}) %}
+{% endfor %}
 
 {% for run in runs %}
 $(ROOT_DIR)/results/{{ run.configuration }}-{{ run.corpus }}-{{ run.corpusvariant }}/results.yml: configurations/{{ run.configuration }}/config.yaml corpora/{{ run.corpus }}/{{ run.corpusvariant }}/corpus.yml
@@ -107,7 +110,7 @@ $(ROOT_DIR)/results/{{ run.configuration }}-{{ run.corpus }}-{{ run.corpusvarian
 	 --testdata-dir $(ROOT_DIR)/corpora/{{ run.corpus }}/{{ run.corpusvariant }} \
 	 --runner {{ run.tool }}phevalrunner \
 	 --tmp-dir {{ directories.tmp }}/ \
-	 --version {{ run.version }} \
+	 --version {{ config_versions[run.configuration] }} \
 	 --output-dir $(shell dirname $@)
 
 	touch $@
