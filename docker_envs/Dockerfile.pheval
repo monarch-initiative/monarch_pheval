@@ -1,0 +1,15 @@
+
+FROM python:3.11-buster
+
+LABEL org.opencontainers.image.source https://github.com/monarch-initiative/monarch_pheval
+
+RUN apt-get update && apt-get install -y wget gnupg ca-certificates lsb-release
+
+RUN wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add - \
+    && echo "deb https://packages.adoptium.net/artifactory/deb buster main" > /etc/apt/sources.list.d/adoptium.list \
+    && apt-get update
+
+RUN apt-get install -y temurin-17-jdk
+
+RUN pip install pheval pheval.exomiser
+
