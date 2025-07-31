@@ -4,41 +4,34 @@ import logging
 
 import click
 
-from monarch_pheval import __version__
-from monarch_pheval.main import demo
+from monarch_pheval.cli_parapheval import execute
 
-__all__ = [
-    "main",
-]
-
-logger = logging.getLogger(__name__)
+info_log = logging.getLogger("info")
 
 
 @click.group()
 @click.option("-v", "--verbose", count=True)
 @click.option("-q", "--quiet")
-@click.version_option(__version__)
-def main(verbose: int, quiet: bool):
+def main(verbose=1, quiet=False) -> None:
     """
-    CLI for monarch_pheval.
+    execute main CLI method for MonarchPhEval.
 
-    :param verbose: Verbosity while running.
-    :param quiet: Boolean to be quiet or verbose.
+    Args:
+        verbose (int, optional): Verbose flag.
+        quiet (bool, optional): Queit Flag.
+
     """
     if verbose >= 2:
-        logger.setLevel(level=logging.DEBUG)
+        info_log.setLevel(level=logging.DEBUG)
     elif verbose == 1:
-        logger.setLevel(level=logging.INFO)
+        info_log.setLevel(level=logging.INFO)
     else:
-        logger.setLevel(level=logging.WARNING)
+        info_log.setLevel(level=logging.WARNING)
     if quiet:
-        logger.setLevel(level=logging.ERROR)
+        info_log.setLevel(level=logging.ERROR)
 
 
-@main.command()
-def run():
-    """Run the monarch_pheval's demo command."""
-    demo()
+main.add_command(execute)
 
 
 if __name__ == "__main__":

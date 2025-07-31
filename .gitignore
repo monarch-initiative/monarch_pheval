@@ -135,9 +135,11 @@ runners/
 !runners/configurations/preset-exome-analysis.yml
 !runners/configurations/template-1.0.0.config.yaml
 results/
-corpora/lirical/default/vcf/
 *gene_rank_comparison.tsv
 results-gene_summary.tsv
 .vscode/
 .nextflow
 work
+corpora/
+./results*.tsv
+jobs
