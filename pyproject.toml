@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "monarch_pheval"
-version = "0.0.0"
+version = "0.1.1"
 description = "monarch_pheval"
 authors = ["Vinicius de Souza <souzadevinicius@gmail.com>"]
 license = "MIT"
@@ -12,10 +12,12 @@ click = "*"
 importlib-metadata = "^4.8.0"
 tomli = "^2.0.1"
 j2cli = "^0.3.10"
-pheval = {git = "https://github.com/monarch-initiative/pheval.git"}
-pheval-exomiser = "^0.2.0"
+pheval = "^0.4.1"
+pyyaml = "^6.0.2"
 
 [tool.poetry.group.dev.dependencies]
+pheval-template = "^0.1.2"
+pytest-workflow = "^2.0.1"
 pytest = {version = ">=7.1.2"}
 tox = {version = ">=3.25.1"}
 pre-commit = {version = ">=3.3.3"}
@@ -34,7 +36,7 @@ myst-parser = {version = ">=0.18.1"}
 monarch_pheval = "monarch_pheval.cli:main"
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
 
@@ -76,6 +78,13 @@ count = ""
 quiet-level = 3
 # ignore-words-list = ""
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "pep440"
+version_provider = "poetry"
+update_changelog_on_bump = true
+major_version_zero = true
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry_dynamic_versioning.backend"

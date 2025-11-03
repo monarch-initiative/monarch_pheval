@@ -14,6 +14,16 @@ pheval:
 	$(MAKE) pheval-report
 
 
+.PHONY: pheval
+pheval:
+	$(MAKE) setup
+	$(MAKE) download-phenotype
+	$(MAKE) prepare-inputs
+	$(MAKE) prepare-corpora
+	$(MAKE) pheval-run
+	#$(MAKE) pheval-report
+
+
 .PHONY: setup
 
 setup: $(ROOT_DIR)/Makefile
@@ -27,6 +37,7 @@ $(TMP_DATA)/monarch_pheval.tar.gz:
 $(ROOT_DIR)/Makefile: $(TMP_DATA)/monarch_pheval.tar.gz
 	tar -zxvf $< --strip-components 1 --no-same-permissions --exclude="resources" --exclude="Makefile" --exclude="corpora" --exclude="data/tmp/all_phenopackets" --exclude="runners/gado"
 	rm -rf $(ROOT_DIR)/configurations
+
 
 
 .PHONY: download
@@ -80,12 +91,10 @@ $(RUNNERS_DIR)/gado:
 
 $(TMP_DATA)/all_phenopackets/all_phenopackets.zip:
 	mkdir -p $(TMP_DATA)/all_phenopackets/
-	wget https://github.com/monarch-initiative/phenopacket-store/releases/download/0.1.12/all_phenopackets.zip -O $@
+	wget https://github.com/monarch-initiative/phenopacket-store/releases/download/0.1.21/all_phenopackets.zip -O $@
 	unzip $@ -d $(ROOT_DIR)/$(shell dirname $@)/
 	mkdir -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets
 	find $(TMP_DATA)/all_phenopackets/ -iname *.json ! -path "$(TMP_DATA)/all_phenopackets/unpacked_phenopackets/*" -exec mv {} $(TMP_DATA)/all_phenopackets/unpacked_phenopackets \;
-
-
 
 .PHONY: clean
 clean:
