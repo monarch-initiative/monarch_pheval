@@ -2,6 +2,17 @@
 
 PHENOTYPE_VERSIONS		:=	2309 2402
 EXOMISER_VERSIONS		:=	13.3.0 14.0.0
+PHEVAL_ZENODO_DATA_URL	:=	https://zenodo.org/records/11458312/files/monarch_pheval.tar.gz
+
+.PHONY: pheval
+pheval:
+	$(MAKE) setup
+	$(MAKE) download-phenotype
+	$(MAKE) prepare-inputs
+	$(MAKE) prepare-corpora
+	$(MAKE) pheval-run
+	$(MAKE) pheval-report
+
 
 .PHONY: pheval
 pheval:
@@ -16,6 +27,17 @@ pheval:
 .PHONY: setup
 
 setup: $(ROOT_DIR)/Makefile
+
+
+$(TMP_DATA)/monarch_pheval.tar.gz:
+	mkdir -p $(TMP_DATA)
+	wget $(PHEVAL_ZENODO_DATA_URL) -O $@
+
+
+$(ROOT_DIR)/Makefile: $(TMP_DATA)/monarch_pheval.tar.gz
+	tar -zxvf $< --strip-components 1 --no-same-permissions --exclude="resources" --exclude="Makefile" --exclude="corpora" --exclude="data/tmp/all_phenopackets" --exclude="runners/gado"
+	rm -rf $(ROOT_DIR)/configurations
+
 
 
 .PHONY: download

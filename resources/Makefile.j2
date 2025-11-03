@@ -34,7 +34,7 @@ info:
 {%- for config in configs %}
 
 {% if config.preprocessing is defined %}
-SQL_DEPENDENCIES_{{ config.id }} = {%- for pp in config.preprocessing %} $(TMP_DATA)/semsim/{{ pp }} {%endfor %}
+SQL_DEPENDENCIES_{{ config.id }} = {%- for pp in config.preprocessing %} $(TMP_DATA)/semsim/{{ pp }} {% endfor %}
 
 configurations/{{ config.id }}/config.yaml: $(RUNNERS_DIR)/exomiser-{{ config.version }} $(SQL_DEPENDENCIES_{{ config.id }})
 	mkdir -p $(ROOT_DIR)/$(shell dirname $@)/
@@ -48,7 +48,7 @@ configurations/{{ config.id }}/config.yaml: $(RUNNERS_DIR)/exomiser-{{ config.ve
  
  {%- for pp in config.preprocessing %}
 	java -Xms128m -Xmx8192m -Dh2.bindAddress=127.0.0.1 -cp $(shell find $< -type f -name "h2*.jar") org.h2.tools.RunScript -url jdbc:h2:file:$(ROOT_DIR)/$(shell dirname $@)/{{ config.phenotype }}_phenotype/{{ config.phenotype }}_phenotype -script $(TMP_DATA)/semsim/{{ pp }} -user sa
- {%endfor %}
+ {% endfor %}
 
 .PHONY: semsim-ingest
 semsim-ingest: configurations/{{ config.id }}/config.yaml
@@ -136,6 +136,11 @@ pheval-run: $(ROOT_DIR)/results/{{ run.configuration }}-{{ run.corpus }}-{{ run.
 
 {% if  corpus.id  == "lirical" %}
 
+corpora/{{ corpus.id }}/default/corpus.yml:
+	test -d $(ROOT_DIR)/corpora/{{ corpus.id }}/default/ || mkdir -p $(ROOT_DIR)/corpora/{{ corpus.id }}/default/
+
+{% if  corpus.id  == "lirical" %}
+
 corpora/{{ corpus.id }}/{{ corpus.variant }}/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/{{ corpus.id }}/{{ corpus.variant }}/ || mkdir -p $(ROOT_DIR)/corpora/{{ corpus.id }}/{{ corpus.variant }}/
 
@@ -176,8 +181,12 @@ corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml: corpora/{{ 
 
 	touch $@
 
-prepare-corpora: corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml
+{%- endfor -%}
 
+
+prepare-corpora: 
+{%- for scrambled in corpus.scrambled -%}
+	$(MAKE) corpora/{{ corpus.id }}/scrambled-{{ scrambled.factor }}/corpus.yml
 {%- endfor -%}
 
 {% for custom_corpus in corpus.custom_variants -%}
@@ -185,6 +194,7 @@ corpora/{{ corpus.id }}/{{ custom_corpus.id }}/corpus.yml: $(ROOT_DIR)/testdata/
 	echo "error $@ needs to be configured manually" && false
 {%- endfor -%}
 
+{% endif %}
 {% endif %}
 {% endfor %}
 
@@ -194,6 +204,6 @@ pheval:
 	$(MAKE) prepare-inputs
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
-	#$(MAKE) pheval-report
+	$(MAKE) pheval-report
 
 include ./resources/custom.Makefile

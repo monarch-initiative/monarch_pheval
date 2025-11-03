@@ -1030,6 +1030,11 @@ pheval-run: $(ROOT_DIR)/results/I02-lirical-default/results.yml
 corpora/lirical/default/corpus.yml:
 	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
+
+
+corpora/lirical/default/corpus.yml:
+	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
+
 	test -L $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz || ln -s $(ROOT_DIR)/testdata/template_vcf/template_exome_hg19.vcf.gz $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz
 	pheval-utils create-spiked-vcfs \
 		--hg19-template-vcf $(ROOT_DIR)/corpora/lirical/default/template_exome_hg19.vcf.gz  \
@@ -1038,6 +1043,12 @@ corpora/lirical/default/corpus.yml:
 	touch $@
 
 
+
+
+
+
+corpora/lirical/default/corpus.yml:
+	test -d $(ROOT_DIR)/corpora/lirical/default/ || mkdir -p $(ROOT_DIR)/corpora/lirical/default/
 
 
 
@@ -1057,21 +1068,12 @@ corpora/lirical/small_version/corpus.yml:
 
 
 
-corpora/phenopacket-store/default/corpus.yml: $(TMP_DATA)/all_phenopackets/all_phenopackets.zip
-	mkdir -p corpora/phenopacket-store/default/phenopackets/
-	pheval-utils prepare-corpus -p $(TMP_DATA)/all_phenopackets/unpacked_phenopackets --gene-analysis -g ensembl_id -o $(ROOT_DIR)/$(shell dirname $@)/
-	touch $@
-	#temporary
-	touch $@
-
-
-
 
 .PHONY: pheval
 pheval:
 	$(MAKE) prepare-inputs
 	$(MAKE) prepare-corpora
 	$(MAKE) pheval-run
-	#$(MAKE) pheval-report
+	$(MAKE) pheval-report
 
 include ./resources/custom.Makefile
